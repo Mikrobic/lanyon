@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Subpage"
+title: "Проекты"
 permalink: /project/subpage/
 description: "Описание страницы Subpage"
 ---
