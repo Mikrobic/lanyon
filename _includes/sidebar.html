@@ -1,17 +1,37 @@
-<nav class="sidebar-nav">
-  <!-- Основное меню -->
-  <a class="sidebar-nav-item" href="/">Главная</a>
-  
-  <!-- Пункт с подменю -->
-  <div class="sidebar-nav-menu">
-    <a href="javascript:void(0)" class="sidebar-nav-item submenu-toggle">Home</a>
-    <div class="sidebar-nav-submenu">
-      <a href="/Home/" class="sidebar-nav-subitem">Основная</a>
-      <a href="/Home/subpage/" class="sidebar-nav-subitem">Subpage</a>
-    </div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>{{ site.description }}</p>
   </div>
 
-  <!-- Остальные страницы -->
-  <a class="sidebar-nav-item" href="/new_page/">New Page</a>
-  <a class="sidebar-nav-item" href="/tests/">Tests</a>
-</nav>
+  <nav class="sidebar-nav">
+    <!-- Главная ссылка -->
+    <a class="sidebar-nav-item{% if page.url == '/' %} active{% endif %}" href="/">Главная</a>
+    
+    <!-- Меню Home с подпунктами -->
+    <div class="sidebar-nav-menu{% if page.url contains '/Home/' %} active{% endif %}">
+      <a href="javascript:void(0)" class="sidebar-nav-item submenu-toggle{% if page.url contains '/Home/' %} active{% endif %}">Home</a>
+      <div class="sidebar-nav-submenu">
+        <a href="/Home/" class="sidebar-nav-subitem{% if page.url == '/Home/' %} active{% endif %}">Основная</a>
+        <a href="/Home/subpage/" class="sidebar-nav-subitem{% if page.url == '/Home/subpage/' %} active{% endif %}">Subpage</a>
+      </div>
+    </div>
+
+    <!-- Другие основные страницы -->
+    <a class="sidebar-nav-item{% if page.url == '/new_page/' %} active{% endif %}" href="/new_page/">New Page</a>
+    <a class="sidebar-nav-item{% if page.url == '/tests/' %} active{% endif %}" href="/tests/">Tests</a>
+
+    <!-- Динамическое меню для остальных страниц -->
+    {% assign pages_list = site.pages | sort:"url" %}
+    {% for node in pages_list %}
+      {% if node.title != null and node.layout == "page" %}
+        {% unless node.url == '/' or node.url == '/new_page/' or node.url == '/tests/' or node.url contains '/Home/' %}
+          <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url | absolute_url }}">{{ node.title }}</a>
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+  </nav>
+
+  <div class="sidebar-item">
+    <p>&copy; {{ site.time | date: '%Y' }}. Все права защищены.</p>
+  </div>
+</div>
