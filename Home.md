@@ -1,4 +1,6 @@
 ---
-layout: Home
-title: tests
+layout: default
+title: Home
 ---
+
+teests
