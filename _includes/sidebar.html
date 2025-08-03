@@ -9,7 +9,22 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item{% if page.title == 'Home' %} active{% endif %}" href="{{ '/' | absolute_url }}">Home</a>
+    <!-- Главная ссылка -->
+    <a class="sidebar-nav-item{% if page.url == '/' %} active{% endif %}" href="{{ '/' | absolute_url }}">Home</a>
+    
+    <!-- Вложенное меню Home -->
+    <div class="sidebar-nav-group{% if page.url contains '/Home/' %} active{% endif %}">
+      <button class="sidebar-nav-toggle">
+        Home Section
+        <svg class="toggle-icon" viewBox="0 0 24 24">
+          <path d="M7 10l5 5 5-5z"/>
+        </svg>
+      </button>
+      <div class="sidebar-submenu">
+        <a href="/Home/" class="sidebar-nav-item{% if page.url == '/Home/' %} active{% endif %}">Main Home</a>
+        <a href="/Home/subpage/" class="sidebar-nav-item{% if page.url == '/Home/subpage/' %} active{% endif %}">Subpage</a>
+      </div>
+    </div>
 
     {% comment %}
       The code below dynamically generates a sidebar nav of pages with
@@ -20,11 +35,14 @@
     {% for node in pages_list %}
       {% if node.title != null %}
         {% if node.layout == "page" %}
-          <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url | absolute_url }}">{{ node.title }}</a>
+          {% unless node.url == '/' or node.url contains '/Home/' %}
+            <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url | absolute_url }}">{{ node.title }}</a>
+          {% endunless %}
         {% endif %}
       {% endif %}
     {% endfor %}
 
+    <!-- Оригинальные ссылки -->
     <a class="sidebar-nav-item" href="{{ site.github.repo }}/archive/v{{ site.version }}.zip">Download</a>
     <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a>
     <span class="sidebar-nav-item">Currently v{{ site.version }}</span>
@@ -36,3 +54,98 @@
     </p>
   </div>
 </div>
+
+<style>
+  /* Стили для групп меню */
+  .sidebar-nav-group {
+    position: relative;
+    margin: 0.2rem 0;
+  }
+
+  .sidebar-nav-toggle {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem 1rem;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #505050;
+  }
+
+  .sidebar-nav-toggle:hover {
+    color: #268bd2;
+    text-decoration: none;
+  }
+
+  .toggle-icon {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    transition: transform 0.2s;
+  }
+
+  .sidebar-nav-group.active .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .sidebar-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding-left: 1.5rem;
+  }
+
+  .sidebar-nav-group.active .sidebar-submenu {
+    max-height: 500px;
+  }
+</style>
+
+<script>
+(function(document) {
+  // Оригинальный код для закрытия сайдбара
+  var toggle = document.querySelector('.sidebar-toggle');
+  var sidebar = document.querySelector('#sidebar');
+  var checkbox = document.querySelector('#sidebar-checkbox');
+
+  document.addEventListener('click', function(e) {
+    var target = e.target;
+    if (!checkbox.checked || sidebar.contains(target) || target === checkbox) return;
+    checkbox.checked = false;
+  });
+
+  // Обработчики для раскрывающихся меню
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleButtons = document.querySelectorAll('.sidebar-nav-toggle');
+    
+    toggleButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const group = this.closest('.sidebar-nav-group');
+        group.classList.toggle('active');
+        
+        // Закрываем другие группы
+        document.querySelectorAll('.sidebar-nav-group').forEach(otherGroup => {
+          if (otherGroup !== group) {
+            otherGroup.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // Автоматически раскрываем активную группу
+    const activeItem = document.querySelector('.sidebar-nav-item.active');
+    if (activeItem) {
+      const parentGroup = activeItem.closest('.sidebar-nav-group');
+      if (parentGroup) {
+        parentGroup.classList.add('active');
+      }
+    }
+  });
+})(document);
+</script>
