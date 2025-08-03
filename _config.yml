@@ -39,17 +39,6 @@ defaults:
       parent: "project"
       permalink: /:baseurl/project/:title/
 
-navigation:
-  main:
-    - title: "Главная"
-      url: "/"
-      order: 1
-    - title: Обо мне
-      url: "/for_me/"
-      order: 2 
-    - title: "Проекты"
-      url: "/projects/"
-      order: 3
 
 # Build settings
 markdown: kramdown
