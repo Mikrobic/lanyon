@@ -1,1 +1,4 @@
-new_page.md
+---
+layout: page
+title: new_page
+---
