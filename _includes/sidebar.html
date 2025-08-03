@@ -2,37 +2,37 @@
 <html lang="en-us">
 
 <head>
-  <!-- Мета-теги -->
+  <!-- Ваши мета-теги -->
   <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
 </head>
 
 <body class="theme-base-0d">
-  <!-- Переключатель сайдбара -->
+  <!-- Target for toggling the sidebar -->
   <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
 
-  <!-- Сайдбар -->
+  <!-- Toggleable sidebar -->
   <div class="sidebar" id="sidebar">
     <div class="sidebar-item">
       <p>{{ site.description }}</p>
     </div>
 
     <nav class="sidebar-nav">
-      <!-- Навигация -->
-      <a class="sidebar-nav-item" href="{{ '/pages/for_me/' | absolute_url }}">Обо мне</a>
-      <a class="sidebar-nav-item" href="{{ '/pages/stack/' | absolute_url }}">Стек</a>
-      <a class="sidebar-nav-item" href="{{ '/pages/career/' | absolute_url }}">Карьерный трек</a>
+      <!-- Page order -->
+      <a class="sidebar-nav-item" href="{{ site.baseurl }}/for_me/">Обо мне</a>
+      <a class="sidebar-nav-item" href="{{ site.baseurl }}/stack/">Стек</a>
+      <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">Карьерный трек</a>
 
-      <!-- Выпадающее меню проектов -->
-      <div class="sidebar-nav-group{% if page.url contains '/pages/project/' %} active{% endif %}">
-        <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/pages/project/' %} active{% endif %}">
+      <!-- Nested project menu -->
+      <div class="sidebar-nav-group{% if page.url contains '/project/' %} active{% endif %}">
+        <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
           Проекты
           <svg class="toggle-icon" viewBox="0 0 24 24">
             <path d="M7 10l5 5 5-5z"/>
           </svg>
         </a>
         <div class="sidebar-submenu">
-          <a href="{{ '/pages/project/subpage/' | absolute_url }}" 
-             class="sidebar-nav-item submenu-item{% if page.url == '/pages/project/subpage/' %} active{% endif %}">
+          <a href="{{ site.baseurl }}/project/subpage/" 
+             class="sidebar-nav-item submenu-item{% if page.url == '/project/subpage/' %} active{% endif %}">
             Дашборд по учёту ёмкости ресурсов компании
           </a>
         </div>
@@ -44,7 +44,7 @@
     </nav>
   </div>
 
-  <!-- Основное содержимое -->
+  <!-- Content wrapper -->
   <div class="wrap">
     <div class="masthead">
       <div class="container">
@@ -61,23 +61,24 @@
 
   <script>
   (function(document) {
-    // Управление состоянием сайдбара
+    // Сохраняем состояние сайдбара
     const sidebarCheckbox = document.getElementById('sidebar-checkbox');
     
-    // Восстановление состояния
+    // Восстановление состояния сайдбара
     if (localStorage.getItem('sidebarState') === 'open') {
       sidebarCheckbox.checked = true;
     }
 
-    // Обработчик изменений
+    // Обработчик изменений состояния сайдбара
     sidebarCheckbox.addEventListener('change', function() {
       localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
     });
 
+    // Оригинальный код для закрытия сайдбара
     var sidebar = document.querySelector('#sidebar');
     const sidebarToggle = document.querySelector('.sidebar-toggle');
 
-    // Закрытие при клике
+    // Закрытие сайдбара при клике на него
     sidebar.addEventListener('click', function(e) {
       if (e.target === sidebar && sidebarCheckbox.checked) {
         sidebarCheckbox.checked = false;
@@ -101,13 +102,14 @@
       localStorage.setItem('sidebarState', 'closed');
     });
 
-    // Управление выпадающими меню
+    // Обработчики для раскрывающихся меню
     document.addEventListener('DOMContentLoaded', function() {
       const toggleButtons = document.querySelectorAll('.sidebar-nav-toggle');
       
       toggleButtons.forEach(button => {
         const group = button.closest('.sidebar-nav-group');
         
+        // Восстановление состояния меню из localStorage
         const menuId = 'menu_' + group.querySelector('a').textContent.trim().toLowerCase();
         if (localStorage.getItem(menuId) === 'open') {
           group.classList.add('active');
@@ -118,10 +120,13 @@
           e.stopPropagation();
           group.classList.toggle('active');
           
+          // Сохранение состояния меню в localStorage
+          const menuId = 'menu_' + group.querySelector('a').textContent.trim().toLowerCase();
           localStorage.setItem(menuId, group.classList.contains('active') ? 'open' : 'closed');
         });
       });
 
+      // Автоматически раскрываем меню для активной страницы
       const activeSubItem = document.querySelector('.sidebar-submenu .active');
       if (activeSubItem) {
         const parentGroup = activeSubItem.closest('.sidebar-nav-group');
