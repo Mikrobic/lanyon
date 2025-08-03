@@ -10,7 +10,7 @@
 
   <nav class="sidebar-nav">
     <!-- Главная ссылка -->
-    <a class="sidebar-nav-item{% if page.url == '/' %} active{% endif %}" href="{{ '/' | prepend: site.baseurl | absolute_url }}">Home</a>
+    <a class="sidebar-nav-item{% if page.url == '/' %} active{% endif %}" href="{{ site.baseurl }}/">Home</a>
     
     <!-- Вложенное меню Home -->
     <div class="sidebar-nav-group{% if page.url contains '/Home/' %} active{% endif %}">
@@ -21,7 +21,7 @@
         </svg>
       </a>
       <div class="sidebar-submenu">
-        <a href="{{ '/Home/subpage/' | prepend: site.baseurl | absolute_url }}" 
+        <a href="{{ site.baseurl }}/Home/subpage/" 
            class="sidebar-nav-item submenu-item{% if page.url == '/Home/subpage/' %} active{% endif %}">
           * Subpage
         </a>
@@ -39,7 +39,7 @@
         {% if node.layout == "page" %}
           {% unless node.url == '/' or node.url contains '/Home/' %}
             <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" 
-               href="{{ node.url | prepend: site.baseurl | absolute_url }}">
+               href="{{ site.baseurl }}{{ node.url }}">
               {{ node.title }}
             </a>
           {% endunless %}
