@@ -12,4 +12,13 @@
 
     checkbox.checked = false;
   }, false);
+  
+  document.addEventListener('DOMContentLoaded', function() {
+  // Обработчик для раскрывающегося меню
+  document.querySelectorAll('.submenu-toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function() {
+      this.parentElement.classList.toggle('active');
+    });
+  });
+});
 })(document);
