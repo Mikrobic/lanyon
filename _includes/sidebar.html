@@ -9,17 +9,17 @@
   </div>
 
   <nav class="sidebar-nav">
-    <!-- Вложенное меню Home -->
-    <div class="sidebar-nav-group{% if page.url contains '/Home/' %} active{% endif %}">
-      <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/Home/' %} active{% endif %}">
-        Home Section
+    <!-- Вложенное меню project -->
+    <div class="sidebar-nav-group{% if page.url contains '/project/' %} active{% endif %}">
+      <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
+        Проекты
         <svg class="toggle-icon" viewBox="0 0 24 24">
           <path d="M7 10l5 5 5-5z"/>
         </svg>
       </a>
       <div class="sidebar-submenu">
-        <a href="{{ site.baseurl }}/Home/subpage/" 
-           class="sidebar-nav-item submenu-item{% if page.url == '/Home/subpage/' %} active{% endif %}">
+        <a href="{{ site.baseurl }}/project/subpage/" 
+           class="sidebar-nav-item submenu-item{% if page.url == '/project/subpage/' %} active{% endif %}">
           * Subpage
         </a>
       </div>
@@ -34,7 +34,7 @@
     {% for node in pages_list %}
       {% if node.title != null %}
         {% if node.layout == "page" %}
-          {% unless node.url == '/' or node.url contains '/Home/' %}
+          {% unless node.url == '/' or node.url contains '/project/' %}
             <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" 
                href="{{ site.baseurl }}{{ node.url }}">
               {{ node.title }}

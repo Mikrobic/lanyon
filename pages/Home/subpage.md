@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Subpage"
+permalink: /project/subpage/
 description: "Описание страницы Subpage"
 ---
 
