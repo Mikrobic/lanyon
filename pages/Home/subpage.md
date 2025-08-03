@@ -1,7 +1,6 @@
 ---
 layout: page
-title: subpage
-permalink: /Home/subpage/
+title: Subpage
 ---
 
 Это вложенная страница Subpage
