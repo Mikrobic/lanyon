@@ -126,7 +126,14 @@
     }
   });
 
-  
+
+  sidebarToggle.addEventListener('click', function(e) {
+    e.preventDefault();
+    sidebarCheckbox.checked = !sidebarCheckbox.checked; // Переключаем состояние
+    localStorage.setItem('sidebarState', sidebarCheckbox.checked ? 'open' : 'closed');
+  });
+
+
   document.addEventListener('click', function(e) {
     var target = e.target;
     if (!sidebarCheckbox.checked || sidebar.contains(target) || target === sidebarCheckbox) return;
