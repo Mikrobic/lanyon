@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Subpage
-permalink: /Home/subpage/
+title: subpage
+permalink: /lanyon Section/subpage/
 ---
 
 Это вложенная страница Subpage
