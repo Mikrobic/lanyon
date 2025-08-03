@@ -2,7 +2,8 @@
 <html lang="en-us">
 
 <head>
-  <!-- Ваши мета-теги и стили -->
+  <!-- Ваши мета-теги -->
+  <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
 </head>
 
 <body class="theme-base-0d">
@@ -57,64 +58,6 @@
   </div>
 
   <label for="sidebar-checkbox" class="sidebar-toggle"></label>
-
-  <style>
-    /* Стили для групп меню */
-    .sidebar-nav-group {
-      position: relative;
-    }
-  
-    .sidebar-nav-toggle {
-      position: relative;
-      padding-right: 2rem;
-      cursor: pointer;
-    }
-  
-    .toggle-icon {
-      position: absolute;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 1em;
-      height: 1em;
-      fill: currentColor;
-      transition: transform 0.2s;
-    }
-  
-    .sidebar-nav-group.active .toggle-icon {
-      transform: translateY(-50%) rotate(180deg);
-    }
-  
-    .sidebar-submenu {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      padding-left: 15px;
-    }
-  
-    .sidebar-nav-group.active .sidebar-submenu {
-      max-height: 500px;
-    }
-  
-    /* Стили для подпунктов */
-    .submenu-item {
-      position: relative;
-      padding-left: 15px !important;
-    }
-  
-    .submenu-item::before {
-      content: "*";
-      position: absolute;
-      left: 0;
-      color: #268bd2;
-    }
-  
-    .sidebar-nav-toggle, 
-    .sidebar-nav-toggle:hover {
-      color: inherit;
-      text-decoration: none;
-    }
-  </style>
 
   <script>
   (function(document) {
