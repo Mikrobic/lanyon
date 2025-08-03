@@ -11,9 +11,12 @@
   <nav class="sidebar-nav">
     <!-- Вложенное меню для Home -->
     <ul class="sidebar-nav-menu">
-      <li class="sidebar-nav-item">
-        <a href="/Home/">Home</a>
+      <li class="sidebar-nav-item has-submenu">
+        <a href="javascript:void(0)" class="submenu-toggle">Home</a>
         <ul class="sidebar-nav-submenu">
+          <li class="sidebar-nav-item">
+            <a href="/Home/">Главная Home</a>
+          </li>
           <li class="sidebar-nav-item">
             <a href="/Home/subpage/">Subpage</a>
           </li>
@@ -42,3 +45,47 @@
     </p>
   </div>
 </div>
+
+<style>
+  /* Стили для раскрывающегося меню */
+  .sidebar-nav-submenu {
+    max-height: 0;
+    overflow: hidden;
+    padding-left: 1rem;
+    transition: max-height 0.3s ease;
+    margin-left: 0;
+    border-left: none;
+  }
+  
+  .sidebar-nav-item.has-submenu.active .sidebar-nav-submenu {
+    max-height: 500px; /* Достаточно большое значение для анимации */
+  }
+  
+  .submenu-toggle {
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .submenu-toggle::after {
+    content: "+";
+    position: absolute;
+    right: 1rem;
+    transition: transform 0.3s;
+  }
+  
+  .sidebar-nav-item.has-submenu.active .submenu-toggle::after {
+    content: "-";
+  }
+</style>
+
+<script>
+  // Добавляем обработчик клика для раскрытия меню
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.submenu-toggle');
+    if (toggle) {
+      toggle.addEventListener('click', function() {
+        this.parentElement.classList.toggle('active');
+      });
+    }
+  });
+</script>
