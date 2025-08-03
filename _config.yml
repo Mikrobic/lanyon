@@ -1,23 +1,55 @@
-# Основные настройки
+# Setup
 title: "Автор"
 tagline: "Тимакин Сергей"
 description: "Проекты Сергея Тимакина"
 url: "https://mikrobic.github.io"
 baseurl: "/lanyon"
 paginate: 5
-permalink: /:categories/:title/
+permalink: /:baseurl/:path/
 
-# Настройки автора
+# About/contact
 author:
   name: "Sergey Timakin"
   url: ""
   email: "timakin1983@mail.ru"
 
-# Плагины
+# Gems
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
 
-# Переменные
+# Custom vars
 version: "1.1.0"
 google_analytics_id: #UA-XXXX-Y
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+      sidebar: true
+  
+  - scope:
+      path: "pages/Home"
+      type: "pages"
+    values:
+      layout: "page"
+      parent: "Home"
+      permalink: /:baseurl/Home/:title/
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+sass:
+  style: compressed
+
+# Exclude
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - LICENSE.md
