@@ -14,6 +14,7 @@
     <a class="sidebar-nav-item" href="{{ site.baseurl }}/stack/">Стек</a>
     <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">Карьерный трек</a>
 
+
     <!-- Вложенное меню project -->
     <div class="sidebar-nav-group{% if page.url contains '/project/' %} active{% endif %}">
       <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
@@ -109,10 +110,23 @@
     localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
   });
 
+
   // Оригинальный код для закрытия сайдбара
   var toggle = document.querySelector('.sidebar-toggle');
   var sidebar = document.querySelector('#sidebar');
 
+
+  // Закрытие сайдбара при клике на него
+  sidebar.addEventListener('click', function(e) {
+  // Проверяем, что клик был именно по сайдбару (не по его содержимому)
+    if (e.target === sidebar && sidebarCheckbox.checked) {
+      sidebarCheckbox.checked = false;
+      localStorage.setItem('sidebarState', 'closed');
+      e.stopPropagation();
+    }
+  });
+
+  
   document.addEventListener('click', function(e) {
     var target = e.target;
     if (!sidebarCheckbox.checked || sidebar.contains(target) || target === sidebarCheckbox) return;
