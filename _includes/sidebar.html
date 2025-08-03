@@ -116,6 +116,7 @@
   var sidebar = document.querySelector('#sidebar');
 
 
+
   // Закрытие сайдбара при клике на него
   sidebar.addEventListener('click', function(e) {
   // Проверяем, что клик был именно по сайдбару (не по его содержимому)
@@ -126,6 +127,7 @@
     }
   });
 
+  const sidebarToggle = document.querySelector('.sidebar-toggle');
 
   sidebarToggle.addEventListener('click', function(e) {
     e.preventDefault();
