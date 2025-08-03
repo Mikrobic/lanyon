@@ -32,12 +32,12 @@ defaults:
       sidebar: true
   
   - scope:
-      path: "pages/Home"
+      path: "pages/project"
       type: "pages"
     values:
       layout: "page"
-      parent: "Home"
-      permalink: /:baseurl/Home/:title/
+      parent: "project"
+      permalink: /:baseurl/project/:title/
 
 # Build settings
 markdown: kramdown
