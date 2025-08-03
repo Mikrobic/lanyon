@@ -21,7 +21,8 @@
         </svg>
       </a>
       <div class="sidebar-submenu">
-        <a href="/Home/subpage/" class="sidebar-nav-item submenu-item{% if page.url == '/Home/subpage/' %} active{% endif %}">Subpage</a>
+        <a href="/Home/" class="sidebar-nav-item submenu-item{% if page.url == '/Home/' %} active{% endif %}">* Main Home</a>
+        <a href="/Home/subpage/" class="sidebar-nav-item submenu-item{% if page.url == '/Home/subpage/' %} active{% endif %}">* Subpage</a>
       </div>
     </div>
 
@@ -113,34 +114,66 @@
 
 <script>
 (function(document) {
+  // Сохраняем состояние сайдбара
+  const sidebarCheckbox = document.getElementById('sidebar-checkbox');
+  
+  // Восстановление состояния сайдбара
+  if (localStorage.getItem('sidebarState') === 'open') {
+    sidebarCheckbox.checked = true;
+  }
+
+  // Обработчик изменений состояния сайдбара
+  sidebarCheckbox.addEventListener('change', function() {
+    localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
+  });
+
   // Оригинальный код для закрытия сайдбара
   var toggle = document.querySelector('.sidebar-toggle');
   var sidebar = document.querySelector('#sidebar');
-  var checkbox = document.querySelector('#sidebar-checkbox');
 
   document.addEventListener('click', function(e) {
     var target = e.target;
-    if (!checkbox.checked || sidebar.contains(target) || target === checkbox) return;
-    checkbox.checked = false;
+    if (!sidebarCheckbox.checked || sidebar.contains(target) || target === sidebarCheckbox) return;
+    sidebarCheckbox.checked = false;
+    localStorage.setItem('sidebarState', 'closed');
   });
 
-  // Обработчики для раскрывающихся меню
+  // Обработчики для раскрывающихся меню с сохранением состояния
   document.addEventListener('DOMContentLoaded', function() {
+    // Функция сохранения состояния меню
+    const saveMenuState = (group) => {
+      const menuId = 'home_menu'; // Уникальный идентификатор для этого меню
+      localStorage.setItem(menuId, group.classList.contains('active') ? 'open' : 'closed');
+    };
+
+    // Функция восстановления состояния меню
+    const restoreMenuState = (group) => {
+      const menuId = 'home_menu';
+      if (localStorage.getItem(menuId) === 'open') {
+        group.classList.add('active');
+      }
+    };
+
     const toggleButtons = document.querySelectorAll('.sidebar-nav-toggle');
     
     toggleButtons.forEach(button => {
+      const group = button.closest('.sidebar-nav-group');
+      restoreMenuState(group);
+      
       button.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
-        const group = this.closest('.sidebar-nav-group');
         group.classList.toggle('active');
+        saveMenuState(group);
       });
     });
 
-    // Автоматически раскрываем активную группу
+    // Автоматически раскрываем меню для активной страницы
     const activeSubItem = document.querySelector('.sidebar-submenu .active');
     if (activeSubItem) {
-      activeSubItem.closest('.sidebar-nav-group').classList.add('active');
+      const parentGroup = activeSubItem.closest('.sidebar-nav-group');
+      parentGroup.classList.add('active');
+      saveMenuState(parentGroup);
     }
   });
 })(document);
