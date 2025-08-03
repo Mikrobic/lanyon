@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Subpage
+title: subpage
 permalink: /Home/subpage/
 ---
 
