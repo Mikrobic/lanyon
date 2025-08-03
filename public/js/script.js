@@ -1,45 +1,35 @@
 (function(document) {
-  // Функция для управления основным сайдбаром
-  var toggle = document.querySelector('.sidebar-toggle');
+  // Инициализация сайдбара
   var sidebar = document.querySelector('#sidebar');
   var checkbox = document.querySelector('#sidebar-checkbox');
-
+  
+  // Закрытие сайдбара при клике вне его области
   document.addEventListener('click', function(e) {
     var target = e.target;
-
-    if(!checkbox.checked ||
-       sidebar.contains(target) ||
-       (target === checkbox || target === toggle)) return;
-
+    if (!checkbox.checked || sidebar.contains(target) || target === checkbox) return;
     checkbox.checked = false;
-  }, false);
+  });
 
-  // Функция для управления раскрывающимися подменю
+  // Обработка подменю
   document.addEventListener('DOMContentLoaded', function() {
-    // Обработчик для раскрывающегося меню
-    document.querySelectorAll('.submenu-toggle').forEach(function(toggle) {
+    // Автоматическое раскрытие активного меню
+    const activeItem = document.querySelector('.sidebar-nav-subitem.active');
+    if (activeItem) {
+      activeItem.closest('.sidebar-nav-menu').classList.add('active');
+    }
+
+    // Обработчики кликов для подменю
+    document.querySelectorAll('.submenu-toggle').forEach(toggle => {
       toggle.addEventListener('click', function(e) {
         e.preventDefault();
-        e.stopPropagation(); // Предотвращаем всплытие, чтобы не закрыть сайдбар
-        
         const menu = this.closest('.sidebar-nav-menu');
         menu.classList.toggle('active');
         
-        // Закрываем другие открытые меню
-        document.querySelectorAll('.sidebar-nav-menu').forEach(function(otherMenu) {
-          if (otherMenu !== menu) {
-            otherMenu.classList.remove('active');
-          }
+        // Закрытие других меню
+        document.querySelectorAll('.sidebar-nav-menu').forEach(other => {
+          if (other !== menu) other.classList.remove('active');
         });
       });
     });
-
-    // Автоматически раскрываем меню если текущая страница вложенная
-    if (document.querySelector('.sidebar-nav-subitem.active')) {
-      const activeMenu = document.querySelector('.sidebar-nav-subitem.active').closest('.sidebar-nav-menu');
-      if (activeMenu) {
-        activeMenu.classList.add('active');
-      }
-    }
   });
 })(document);
