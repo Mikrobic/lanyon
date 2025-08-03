@@ -556,3 +556,41 @@ a.pagination-item:hover {
 .layout-reverse.sidebar-overlay #sidebar-checkbox:checked ~ .sidebar {
   box-shadow: -.25rem 0 .5rem rgba(0,0,0,.1);
 }
+
+/* Стили для вложенного меню */
+.sidebar-nav-menu {
+  position: relative;
+}
+
+.sidebar-nav-submenu {
+  max-height: 0;
+  overflow: hidden;
+  padding-left: 1.5rem;
+  transition: max-height 0.3s ease;
+}
+
+.sidebar-nav-menu.active .sidebar-nav-submenu {
+  max-height: 500px;
+}
+
+.sidebar-nav-subitem {
+  display: block;
+  padding: 0.25rem 0;
+  color: #666;
+  font-size: 0.9em;
+  text-decoration: none;
+}
+
+.sidebar-nav-subitem:hover {
+  color: #268bd2;
+}
+
+.submenu-toggle::after {
+  content: "▸";
+  float: right;
+  transition: transform 0.3s;
+}
+
+.sidebar-nav-menu.active .submenu-toggle::after {
+  transform: rotate(90deg);
+}
