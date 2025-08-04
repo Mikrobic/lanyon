@@ -13,8 +13,7 @@ order: 4
 ```
 
 <div class="responsive-image-container" style="--aspect-ratio: 1086/357;">
-  <img src="https://github.com/Mikrobic/lanyon/blob/main/public/dashboard.jpg" 
-       alt="Описание изображения"
-       class="responsive-image"
+  <img src="{{ '/public/dashboard.jpg' | absolute_url }}" 
+       alt="Адаптивный дашборд"
        loading="lazy">
 </div>
