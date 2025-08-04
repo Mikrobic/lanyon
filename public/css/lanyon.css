@@ -212,7 +212,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 15px !important;
 }
 
-/* Черточка перед подпунктами
+/* Черточка перед подпунктами --добавляется сюда class="sidebar-nav-item submenu-item{% if page.url == '/project/subpage/' %} active{% endif %}">
 .submenu-item::before {
   content: "*";
   position: absolute;
