@@ -537,6 +537,7 @@ a.pagination-item:hover {
 }
 
 
+
 /*
  * Overlay sidebar
  */
@@ -553,4 +554,20 @@ a.pagination-item:hover {
 
 .layout-reverse.sidebar-overlay #sidebar-checkbox:checked ~ .sidebar {
   box-shadow: -.25rem 0 .5rem rgba(0,0,0,.1);
+}
+
+/* Медиа - контент */
+@media (max-width: 768px) {
+  .container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .project-image {
+    width: 100% !important;
+    float: none !important;
+    margin: 10px 0 !important;
+  }
 }
