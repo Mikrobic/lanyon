@@ -556,52 +556,42 @@ a.pagination-item:hover {
   box-shadow: -.25rem 0 .5rem rgba(0,0,0,.1);
 }
 
-/* Медиа - контент */
-/* Контейнер с сохранением пропорций */
-.responsive-image-container {
-  /* Основные стили */
+/* Контейнер для изображения */
+.image-optimized-container {
   max-width: 1086px;
-  margin: 1rem auto;
-  overflow: hidden;
+  margin: 2rem auto;
+  text-align: center; /* Центрирование */
+}
+
+/* Стили самого изображения */
+.optimized-image {
+  width: 100%;
+  height: auto;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  
-  /* Для сохранения пропорций */
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: calc(100% / (var(--aspect-ratio)));
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Стили для самого изображения */
-.responsive-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-/* Адаптация для мобильных */
-@media (max-width: 1086px) {
-  .responsive-image-container {
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .image-optimized-container {
     margin: 1rem;
-    border-radius: 6px; /* Чуть меньше скругление на мобильных */
+    padding: 0;
+  }
+  
+  .optimized-image {
+    width: 100vw; /* На всю ширину экрана */
+    max-width: 100vw;
+    margin-left: -1rem; /* Компенсация padding контейнера */
+    border-radius: 0; /* Убираем скругление на мобильных */
+    box-shadow: none; /* Убираем тень на мобильных */
   }
 }
 
-/* Ховер-эффект только для устройств с поддержкой hover */
-@media (hover: hover) {
-  .responsive-image:hover {
-    transform: scale(1.02);
-  }
-}
-
-/* Оптимизация для узких экранов */
-@media (max-width: 480px) {
-  .responsive-image-container {
-    box-shadow: 0 1px 5px rgba(0,0,0,0.1); /* Более тонкая тень */
+/* Оптимизация для Retina-экранов */
+@media 
+(-webkit-min-device-pixel-ratio: 2), 
+(min-resolution: 192dpi) { 
+  .optimized-image {
+    image-rendering: -webkit-optimize-contrast;
   }
 }
