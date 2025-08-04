@@ -560,7 +560,7 @@ a.pagination-item:hover {
 /* Контейнер с сохранением пропорций */
 .responsive-image-container {
   /* Основные стили */
-  max-width: 1412px;
+  max-width: 1086px;
   margin: 1rem auto;
   overflow: hidden;
   border-radius: 8px;
@@ -585,7 +585,7 @@ a.pagination-item:hover {
 }
 
 /* Адаптация для мобильных */
-@media (max-width: 1412px) {
+@media (max-width: 1086px) {
   .responsive-image-container {
     margin: 1rem;
     border-radius: 6px; /* Чуть меньше скругление на мобильных */
