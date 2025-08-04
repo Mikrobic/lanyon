@@ -12,7 +12,7 @@ order: 4
 </body>
 ```
 
-<div class="responsive-image-container" style="--aspect-ratio: 1086/357;">
+<div class="responsive-image-container" style="--aspect-ratio: 1400/357;">
   <img src="{{ '/public/dashboard.jpg' | absolute_url }}" 
        alt="Адаптивный дашборд"
        loading="lazy">
