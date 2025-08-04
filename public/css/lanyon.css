@@ -585,7 +585,7 @@ a.pagination-item:hover {
 }
 
 /* Адаптация для мобильных */
-@media (max-width: 1086px) {
+@media (max-width: 1412px) {
   .responsive-image-container {
     margin: 1rem;
     border-radius: 6px; /* Чуть меньше скругление на мобильных */
