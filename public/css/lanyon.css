@@ -212,12 +212,14 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 15px !important;
 }
 
+/* Черточка перед подпунктами
 .submenu-item::before {
   content: "*";
   position: absolute;
   left: 0;
   color: #268bd2;
 }
+*/
 
 .sidebar-nav-item {
   display: block;
