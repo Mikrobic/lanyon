@@ -12,7 +12,7 @@ order: 4
 </body>
 ```
 
-<div class="responsive-image-container">
+<div class="responsive-image-container" style="--aspect-ratio: 1086/357;">
   <img src="https://github.com/user-attachments/assets/310f9012-424f-46de-8eec-4ce83b332bb2" 
        alt="Описание изображения"
        class="responsive-image"

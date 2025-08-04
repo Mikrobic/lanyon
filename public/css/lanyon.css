@@ -557,29 +557,51 @@ a.pagination-item:hover {
 }
 
 /* Медиа - контент */
+/* Контейнер с сохранением пропорций */
 .responsive-image-container {
-  max-width: 1086px; /* Максимальная ширина оригинального изображения */
+  /* Основные стили */
+  max-width: 1086px;
   margin: 1rem auto;
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  
+  /* Для сохранения пропорций */
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: calc(100% / (var(--aspect-ratio)));
 }
 
+/* Стили для самого изображения */
 .responsive-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.3s ease;
 }
 
+/* Адаптация для мобильных */
 @media (max-width: 1086px) {
   .responsive-image-container {
     margin: 1rem;
+    border-radius: 6px; /* Чуть меньше скругление на мобильных */
   }
 }
 
+/* Ховер-эффект только для устройств с поддержкой hover */
 @media (hover: hover) {
   .responsive-image:hover {
     transform: scale(1.02);
+  }
+}
+
+/* Оптимизация для узких экранов */
+@media (max-width: 480px) {
+  .responsive-image-container {
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1); /* Более тонкая тень */
   }
 }
