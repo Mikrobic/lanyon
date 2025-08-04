@@ -12,9 +12,9 @@ order: 4
 </body>
 ```
 
-{% raw %}<div class="project-image-wrapper">
-  <img src="/public/dashboard.jpg" 
-       alt="Дашборд ресурсов компании"
-       class="project-image"
+<div class="responsive-image-container">
+  <img src="https://github.com/user-attachments/assets/310f9012-424f-46de-8eec-4ce83b332bb2" 
+       alt="Описание изображения"
+       class="responsive-image"
        loading="lazy">
-</div>{% endraw %}
+</div>
