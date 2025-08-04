@@ -558,7 +558,7 @@ a.pagination-item:hover {
 
 /* Контейнер для изображения */
 .image-optimized-container {
-  max-width: 1086px;
+  max-width: 1400px;
   margin: 2rem auto;
   text-align: center; /* Центрирование */
 }
