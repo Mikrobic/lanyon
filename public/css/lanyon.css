@@ -557,17 +557,29 @@ a.pagination-item:hover {
 }
 
 /* Медиа - контент */
-@media (max-width: 768px) {
-  .container img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+.responsive-image-container {
+  max-width: 1086px; /* Максимальная ширина оригинального изображения */
+  margin: 1rem auto;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.responsive-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 1086px) {
+  .responsive-image-container {
+    margin: 1rem;
   }
-  
-  .project-image {
-    width: 100% !important;
-    float: none !important;
-    margin: 10px 0 !important;
+}
+
+@media (hover: hover) {
+  .responsive-image:hover {
+    transform: scale(1.02);
   }
 }
