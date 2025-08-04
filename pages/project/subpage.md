@@ -12,8 +12,11 @@ order: 4
 </body>
 ```
 
-<div class="responsive-image-container" style="--aspect-ratio: 1400/357;">
-  <img src="{{ '/public/dashboard.jpg' | absolute_url }}" 
-       alt="Адаптивный дашборд"
-       loading="lazy">
+<div class="enlarged-image-wrapper">
+  <div class="responsive-image-container" style="--aspect-ratio: 1100/200;">
+    <img src="{{ '/public/dashboard.jpg' | absolute_url }}" 
+         alt="Дашборд ресурсов компании"
+         class="enlarged-image"
+         loading="lazy">
+  </div>
 </div>
