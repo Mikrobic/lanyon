@@ -13,7 +13,7 @@ order: 4
 ```
 
 {% raw %}<div class="project-image-wrapper">
-  <img src="/public/images/dashboard.jpg" 
+  <img src="/public/dashboard.jpg" 
        alt="Дашборд ресурсов компании"
        class="project-image"
        loading="lazy">
