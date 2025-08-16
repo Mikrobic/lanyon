@@ -80,7 +80,10 @@
     if (sidebarToggle) {
       sidebarToggle.addEventListener('click', function(e) {
         e.preventDefault();
-        toggleSidebar();
+        // Закрытие меню при клике на гамбургер, если оно уже открыто
+        if (sidebarCheckbox.checked) {
+          toggleSidebar();
+        }
       });
     }
 
