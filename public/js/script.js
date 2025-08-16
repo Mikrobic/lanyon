@@ -1,30 +1,29 @@
 (function(document) {
-  var toggle = document.querySelector('.sidebar-toggle');
-  var sidebar = document.querySelector('#sidebar');
-  var checkbox = document.querySelector('#sidebar-checkbox');
+  // Initialize sidebar state
+  document.addEventListener('DOMContentLoaded', function() {
+    const sidebarCheckbox = document.getElementById('sidebar-checkbox');
+    
+    // Set initial state based on viewport
+    if (window.innerWidth >= 768) {
+      sidebarCheckbox.checked = true;
+      localStorage.setItem('sidebarState', 'open');
+    } else {
+      sidebarCheckbox.checked = localStorage.getItem('sidebarState') === 'open';
+    }
 
-  document.addEventListener('click', function(e) {
-    var target = e.target;
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth >= 768) {
+        sidebarCheckbox.checked = true;
+        localStorage.setItem('sidebarState', 'open');
+      } else {
+        sidebarCheckbox.checked = localStorage.getItem('sidebarState') === 'open';
+      }
+    });
+  });
 
-    if(!checkbox.checked ||
-       sidebar.contains(target) ||
-       (target === checkbox || target === toggle)) return;
-
-    checkbox.checked = false;
-  }, false);
-
-
- function checkMobile() {
-  if (window.innerWidth <= 768) {
-    document.body.classList.add('mobile-view');
-    // Закрываем сайдбар по умолчанию на мобильных
-    sidebarCheckbox.checked = false;
-  } else {
-    document.body.classList.remove('mobile-view');
-  }
-}
-
-// Проверяем при загрузке и при изменении размера окна
-window.addEventListener('load', checkMobile);
-window.addEventListener('resize', checkMobile);
+  // Prevent default behavior for sidebar toggle
+  document.querySelector('.sidebar-toggle').addEventListener('click', function(e) {
+    e.preventDefault();
+  });
 })(document);
