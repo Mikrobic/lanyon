@@ -53,16 +53,6 @@
     var sidebar = document.querySelector('#sidebar');
     var checkbox = document.querySelector('#sidebar-checkbox');
 
-    // Сохраняем состояние сайдбара
-    if (localStorage.getItem('sidebarState') === 'open') {
-      checkbox.checked = true;
-    }
-
-    // Обработчик изменений состояния сайдбара
-    checkbox.addEventListener('change', function() {
-      localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
-    });
-
     // Закрытие сайдбара при клике вне его
     document.addEventListener('click', function(e) {
       var target = e.target;
