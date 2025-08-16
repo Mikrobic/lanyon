@@ -114,7 +114,7 @@
 
     // Закрытие при клике вне сайдбара
     document.addEventListener('click', function(e) {
-      if (!sidebar.contains(e.target) {
+      if (!sidebar.contains(e.target)) {
         if (sidebarCheckbox.checked && e.target !== sidebarToggle) {
           toggleSidebar();
         }
