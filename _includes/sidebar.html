@@ -5,21 +5,9 @@
   <!-- Ваши мета-теги -->
   <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
   <style>
-    /* Дополнительные стили */
+    /* Дополнительные стили только для анимации */
     .sidebar {
       transition: transform 0.3s ease;
-      transform: translateX(-100%);
-    }
-    .sidebar-checkbox:checked ~ .sidebar {
-      transform: translateX(0);
-    }
-    .sidebar-toggle {
-      position: fixed;
-      top: 0.5rem;
-      left: 0.5rem;
-      z-index: 100;
-      cursor: pointer;
-      font-size: 1.5rem;
     }
   </style>
 </head>
@@ -62,8 +50,7 @@
     </nav>
   </div>
 
-  <!-- Основная кнопка-переключатель -->
-  <label for="sidebar-checkbox" class="sidebar-toggle">☰</label>
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
   <script>
   (function(document) {
@@ -75,34 +62,32 @@
     // Восстановление состояния сайдбара
     if (localStorage.getItem('sidebarState') === 'open') {
       sidebarCheckbox.checked = true;
-      sidebar.style.transform = 'translateX(0)';
     }
 
     // Обработчик изменений состояния сайдбара
     sidebarCheckbox.addEventListener('change', function() {
       localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
-      // Принудительно применяем стили
-      sidebar.style.transform = this.checked ? 'translateX(0)' : 'translateX(-100%)';
     });
 
-    // Обработчик клика по кнопке-переключателю
+    // Функция для переключения сайдбара
+    function toggleSidebar() {
+      sidebarCheckbox.checked = !sidebarCheckbox.checked;
+      const event = new Event('change');
+      sidebarCheckbox.dispatchEvent(event);
+    }
+
+    // Обработчик клика по кнопке меню (гамбургер)
     if (sidebarToggle) {
       sidebarToggle.addEventListener('click', function(e) {
         e.preventDefault();
-        // Переключаем состояние
-        sidebarCheckbox.checked = !sidebarCheckbox.checked;
-        // Триггерим событие change
-        const event = new Event('change');
-        sidebarCheckbox.dispatchEvent(event);
+        toggleSidebar();
       });
     }
 
     // Закрытие сайдбара при клике на него
     sidebar.addEventListener('click', function(e) {
       if (e.target === sidebar && sidebarCheckbox.checked) {
-        sidebarCheckbox.checked = false;
-        const event = new Event('change');
-        sidebarCheckbox.dispatchEvent(event);
+        toggleSidebar();
         e.stopPropagation();
       }
     });
@@ -115,9 +100,9 @@
           target === sidebarToggle || 
           sidebar.contains(target)) return;
       
-      sidebarCheckbox.checked = false;
-      const event = new Event('change');
-      sidebarCheckbox.dispatchEvent(event);
+      if (sidebarCheckbox.checked) {
+        toggleSidebar();
+      }
     });
 
     // Закрытие сайдбара при клике на пункты меню
@@ -127,9 +112,7 @@
         if (!this.hasAttribute('target') && !this.href.startsWith('http') && 
             !this.href.startsWith('mailto') && !this.href.startsWith('tel')) {
           if (sidebarCheckbox.checked) {
-            sidebarCheckbox.checked = false;
-            const event = new Event('change');
-            sidebarCheckbox.dispatchEvent(event);
+            toggleSidebar();
           }
         }
       });
