@@ -33,36 +33,7 @@
  *
  * Update the foundational and global aspects of the page.
  */
-
- .sidebar-toggle {
-  position: fixed;
-  top: 0.5rem;
-  left: 0.5rem;
-  width: 44px;
-  height: 44px;
-  padding: 10px;
-  cursor: pointer;
-  z-index: 1000;
-  background-color: #f5f5f5;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-}
-
-.sidebar-toggle:before {
-  content: '';
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: #505050;
-  position: absolute;
-  top: 12px;
-  left: 10px;
-  box-shadow: 
-    0 8px 0 0 #505050,
-    0 16px 0 0 #505050;
-}
-
-
+ 
 
 /* Prevent scroll on narrow devices */
 html,
@@ -322,6 +293,11 @@ a.sidebar-nav-item:focus {
   }
 }
 
+@media print {
+  .sidebar-toggle {
+    display: none;
+  }
+}
 
 /* Slide effect */
 .wrap,
