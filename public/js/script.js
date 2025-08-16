@@ -15,13 +15,15 @@
     checkbox.checked = false;
   }, false);
 
-  // Управление подменю
-  document.querySelectorAll('.sidebar-nav-toggle').forEach(function(toggle) {
-    toggle.addEventListener('click', function(e) {
+  const toggleButtons = document.querySelectorAll('.sidebar-nav-toggle');
+  toggleButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
       e.preventDefault();
-      var submenu = this.nextElementSibling;
-      submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-      this.classList.toggle('open');
+      const submenu = this.nextElementSibling;
+      const isOpen = submenu.style.display === 'block';
+      
+      submenu.style.display = isOpen ? 'none' : 'block';
+      this.classList.toggle('open', !isOpen);
     });
   });
 })(document);
