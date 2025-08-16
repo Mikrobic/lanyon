@@ -33,7 +33,6 @@
  *
  * Update the foundational and global aspects of the page.
  */
- 
 
 /* Prevent scroll on narrow devices */
 html,
@@ -72,40 +71,6 @@ h1, h2, h3, h4, h5, h6 {
  *
  * Center the page content.
  */
-
-/* Стили для раскрывающегося меню */
-.sidebar-nav-group {
-  position: relative;
-}
-
-.sidebar-submenu {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  padding-left: 1rem;
-}
-
-.sidebar-nav-group.active .sidebar-submenu {
-  max-height: 500px; /* Достаточно большое значение для анимации */
-}
-
-.sidebar-nav-toggle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.toggle-icon {
-  width: 1em;
-  height: 1em;
-  transition: transform 0.3s ease;
-}
-
-.sidebar-nav-group.active .toggle-icon {
-  transform: rotate(180deg);
-}
-
-
 
 .container {
   max-width: 28rem;
@@ -164,6 +129,14 @@ h1, h2, h3, h4, h5, h6 {
  *
  * The sidebar is the drawer, the item we are toggling with our handy hamburger
  * button in the corner of the page.
+ *
+ * This particular sidebar implementation was inspired by Chris Coyier's
+ * "Offcanvas Menu with CSS Target" article, and the checkbox variation from the
+ * comments by a reader. It modifies both implementations to continue using the
+ * checkbox (no change in URL means no polluted browser history), but this uses
+ * `position` for the menu to avoid some potential content reflow issues.
+ *
+ * Source: http://css-tricks.com/off-canvas-menu-with-css-target/#comment-207504
  */
 
 /* Style and "hide" the sidebar */
@@ -176,14 +149,15 @@ h1, h2, h3, h4, h5, h6 {
   visibility: hidden;
   overflow-y: auto;
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
-  font-size: .875rem;
+  font-size: .875rem; /* 15px */
   color: rgba(255,255,255,.6);
   background-color: #202020;
-  transition: all .3s ease-in-out;
+  -webkit-transition: all .3s ease-in-out;
+          transition: all .3s ease-in-out;
 }
 @media (min-width: 30em) {
   .sidebar {
-    font-size: .75rem;
+    font-size: .75rem; /* 14px */
   }
 }
 
@@ -203,59 +177,6 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar-nav {
   border-bottom: 1px solid rgba(255,255,255,.1);
 }
-
-/* Стили для групп меню */
-.sidebar-nav-group {
-  position: relative;
-}
-
-.sidebar-nav-toggle {
-  position: relative;
-  padding-right: 2rem;
-  cursor: pointer;
-}
-
-.toggle-icon {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1em;
-  height: 1em;
-  fill: currentColor;
-  transition: transform 0.2s;
-}
-
-.sidebar-nav-group.active .toggle-icon {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.sidebar-submenu {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  padding-left: 15px;
-}
-
-.sidebar-nav-group.active .sidebar-submenu {
-  max-height: 500px;
-}
-
-/* Стили для подпунктов */
-.submenu-item {
-  position: relative;
-  padding-left: 15px !important;
-}
-
-/* Черточка перед подпунктами --добавляется сюда 
-.submenu-item::before {
-  content: "*";
-  position: absolute;
-  left: 0;
-  color: #268bd2;
-}
-*/
-
 .sidebar-nav-item {
   display: block;
   padding: .5rem 1rem;
@@ -274,22 +195,24 @@ a.sidebar-nav-item:focus {
     padding: 1.5rem;
   }
   .sidebar-nav-item {
-    padding-left: 1.5rem;
+    padding-left:  1.5rem;
     padding-right: 1.5rem;
   }
 }
 
-/* Hide the sidebar checkbox */
+/* Hide the sidebar checkbox that we toggle with `.sidebar-toggle` */
 .sidebar-checkbox {
   position: absolute;
   opacity: 0;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 /* Style the `label` that we use to target the `.sidebar-checkbox` */
 .sidebar-toggle {
   position: absolute;
-  top: .8rem;
+  top:  .8rem;
   left: 1rem;
   display: flex;
   align-items: center;
@@ -333,15 +256,30 @@ a.sidebar-nav-item:focus {
   }
 }
 
-/* Slide effect */
+/* Slide effect
+ *
+ * Handle the sliding effects of the sidebar and content in one spot, seperate
+ * from the default styles.
+ *
+ * As an a heads up, we don't use `transform: translate3d()` here because when
+ * mixed with `position: fixed;` for the sidebar toggle, it creates a new
+ * containing block. Put simply, the fixed sidebar toggle behaves like
+ * `position: absolute;` when transformed.
+ *
+ * Read more about it at http://meyerweb.com/eric/thoughts/2011/09/12/.
+ */
+
 .wrap,
 .sidebar,
 .sidebar-toggle {
-  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+          backface-visibility: hidden;
 }
 .wrap,
 .sidebar-toggle {
-  transition: transform .3s ease-in-out;
+  -webkit-transition: -webkit-transform .3s ease-in-out;
+          transition: transform .3s ease-in-out;
 }
 
 #sidebar-checkbox:checked + .sidebar {
@@ -351,12 +289,17 @@ a.sidebar-nav-item:focus {
 #sidebar-checkbox:checked ~ .sidebar,
 #sidebar-checkbox:checked ~ .wrap,
 #sidebar-checkbox:checked ~ .sidebar-toggle {
-  transform: translateX(14rem);
+  -webkit-transform: translateX(14rem);
+      -ms-transform: translateX(14rem);
+          transform: translateX(14rem);
 }
 
 
 /*
  * Posts and pages
+ *
+ * Each post is wrapped in `.post` and is used on default and post layouts. Each
+ * page is wrapped in `.page` and is only used on the page layout.
  */
 
 .page,
@@ -364,6 +307,7 @@ a.sidebar-nav-item:focus {
   margin-bottom: 4em;
 }
 
+/* Blog post or page title */
 .page-title,
 .post-title,
 .post-title a {
@@ -374,6 +318,7 @@ a.sidebar-nav-item:focus {
   margin-top: 0;
 }
 
+/* Meta data line below post title */
 .post-date {
   display: block;
   margin-top: -.5rem;
@@ -381,6 +326,7 @@ a.sidebar-nav-item:focus {
   color: #9a9a9a;
 }
 
+/* Related posts */
 .related {
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -408,10 +354,13 @@ a.sidebar-nav-item:focus {
 
 /*
  * Pagination
+ *
+ * Super lightweight (HTML-wise) blog pagination. `span`s are provide for when
+ * there are no more previous or next posts to show.
  */
 
 .pagination {
-  overflow: hidden;
+  overflow: hidden; /* clearfix */
   margin-left: -1rem;
   margin-right: -1rem;
   font-family: "PT Sans", Helvetica, Arial, sans-serif;
@@ -419,6 +368,7 @@ a.sidebar-nav-item:focus {
   text-align: center;
 }
 
+/* Pagination items can be `span`s or `a`s */
 .pagination-item {
   display: block;
   padding: 1rem;
@@ -428,6 +378,7 @@ a.sidebar-nav-item:focus {
   margin-bottom: -1px;
 }
 
+/* Only provide a hover state for linked pagination items */
 a.pagination-item:hover {
   background-color: #f5f5f5;
 }
@@ -442,12 +393,12 @@ a.pagination-item:hover {
   }
   .pagination-item:first-child {
     margin-bottom: 0;
-    border-top-left-radius: 4px;
+    border-top-left-radius:    4px;
     border-bottom-left-radius: 4px;
   }
   .pagination-item:last-child {
     margin-left: -1px;
-    border-top-right-radius: 4px;
+    border-top-right-radius:    4px;
     border-bottom-right-radius: 4px;
   }
 }
@@ -455,6 +406,9 @@ a.pagination-item:hover {
 
 /*
  * Reverse layout
+ *
+ * Flip the orientation of the page by placing the `.sidebar` and sidebar toggle
+ * on the right side.
  */
 
 .layout-reverse .sidebar {
@@ -469,12 +423,17 @@ a.pagination-item:hover {
 .layout-reverse #sidebar-checkbox:checked ~ .sidebar,
 .layout-reverse #sidebar-checkbox:checked ~ .wrap,
 .layout-reverse #sidebar-checkbox:checked ~ .sidebar-toggle {
-  transform: translateX(-14rem);
+  -webkit-transform: translateX(-14rem);
+      -ms-transform: translateX(-14rem);
+          transform: translateX(-14rem);
 }
 
 
 /*
  * Themes
+ *
+ * Apply custom color schemes by adding the appropriate class to the `body`.
+ * Based on colors from Base16: http://chriskempson.github.io/base16/#default.
  */
 
 /* Red */
@@ -574,13 +533,17 @@ a.pagination-item:hover {
 }
 
 
-
 /*
  * Overlay sidebar
+ *
+ * Make the sidebar content overlay the viewport content instead of pushing it
+ * aside when toggled.
  */
 
 .sidebar-overlay #sidebar-checkbox:checked ~ .wrap {
-  transform: translateX(0);
+  -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: translateX(0);
 }
 .sidebar-overlay #sidebar-checkbox:checked ~ .sidebar-toggle {
   box-shadow: 0 0 0 .25rem #fff;
@@ -589,6 +552,7 @@ a.pagination-item:hover {
   box-shadow: .25rem 0 .5rem rgba(0,0,0,.1);
 }
 
+/* Only one tweak for a reverse layout */
 .layout-reverse.sidebar-overlay #sidebar-checkbox:checked ~ .sidebar {
   box-shadow: -.25rem 0 .5rem rgba(0,0,0,.1);
 }
