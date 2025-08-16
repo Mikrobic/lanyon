@@ -128,6 +128,18 @@
         });
       });
 
+
+        if (sidebarToggle) {
+          sidebarToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Просто переключаем состояние - это обеспечит и открытие и закрытие
+          sidebarCheckbox.checked = !sidebarCheckbox.checked;
+        // Триггерим событие change для обновления localStorage
+          const event = new Event('change');
+          sidebarCheckbox.dispatchEvent(event);
+      });
+    }
+
       // Автоматически раскрываем меню для активной страницы
       const activeSubItem = document.querySelector('.sidebar-submenu .active');
       if (activeSubItem) {
