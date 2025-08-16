@@ -5,23 +5,9 @@
   <!-- Ваши мета-теги -->
   <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
   <style>
-    /* Добавляем дополнительные стили для надежности */
-    .sidebar-checkbox:checked ~ .sidebar {
-      transform: translateX(0);
-      visibility: visible;
-    }
-    .sidebar-checkbox:not(:checked) ~ .sidebar {
-      transform: translateX(-100%);
-      visibility: hidden;
-    }
+    /* Дополнительные стили только для анимации */
     .sidebar {
-      transition: transform 0.3s ease, visibility 0.3s;
-      will-change: transform;
-      z-index: 100;
-    }
-    .sidebar-toggle {
-      z-index: 101;
-      cursor: pointer;
+      transition: transform 0.3s ease;
     }
   </style>
 </head>
@@ -64,7 +50,7 @@
     </nav>
   </div>
 
-  <label for="sidebar-checkbox" class="sidebar-toggle">☰</label>
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
   <script>
   (function(document) {
@@ -76,55 +62,24 @@
     // Восстановление состояния сайдбара
     if (localStorage.getItem('sidebarState') === 'open') {
       sidebarCheckbox.checked = true;
-      // Принудительно применяем стили при загрузке
-      setTimeout(() => {
-        sidebar.style.transform = 'translateX(0)';
-        sidebar.style.visibility = 'visible';
-      }, 10);
     }
 
-    // Улучшенный обработчик изменений состояния сайдбара
+    // Обработчик изменений состояния сайдбара
     sidebarCheckbox.addEventListener('change', function() {
-      console.log('Состояние чекбокса изменилось:', this.checked);
       localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
-      
-      // Принудительное применение стилей
-      if (this.checked) {
-        sidebar.style.transform = 'translateX(0)';
-        sidebar.style.visibility = 'visible';
-      } else {
-        sidebar.style.transform = 'translateX(-100%)';
-        sidebar.style.visibility = 'hidden';
-      }
     });
 
-    // Улучшенная функция для переключения сайдбара
+    // Функция для переключения сайдбара
     function toggleSidebar() {
-      const newState = !sidebarCheckbox.checked;
-      console.log('Переключение сайдбара. Текущее состояние:', sidebarCheckbox.checked, 'Новое состояние:', newState);
-      
-      sidebarCheckbox.checked = newState;
-      
-      // Двойное триггерирование для надежности
-      const changeEvent = new Event('change', { bubbles: true });
-      sidebarCheckbox.dispatchEvent(changeEvent);
-      
-      // Дополнительная проверка через 10мс
-      setTimeout(() => {
-        if (sidebarCheckbox.checked !== newState) {
-          console.warn('Состояние не изменилось, принудительно обновляем');
-          sidebarCheckbox.checked = newState;
-          sidebarCheckbox.dispatchEvent(new Event('change'));
-        }
-      }, 10);
+      sidebarCheckbox.checked = !sidebarCheckbox.checked;
+      const event = new Event('change');
+      sidebarCheckbox.dispatchEvent(event);
     }
 
-    // Улучшенный обработчик клика по кнопке меню (гамбургер)
+    // Обработчик клика по кнопке меню (гамбургер)
     if (sidebarToggle) {
       sidebarToggle.addEventListener('click', function(e) {
-        console.log('Гамбургер кликнут');
         e.preventDefault();
-        e.stopPropagation();
         toggleSidebar();
       });
     }
@@ -132,7 +87,6 @@
     // Закрытие сайдбара при клике на него
     sidebar.addEventListener('click', function(e) {
       if (e.target === sidebar && sidebarCheckbox.checked) {
-        console.log('Клик по сайдбару - закрытие');
         toggleSidebar();
         e.stopPropagation();
       }
@@ -146,7 +100,6 @@
           target === sidebarToggle || 
           sidebar.contains(target)) return;
       
-      console.log('Клик вне сайдбара - закрытие');
       if (sidebarCheckbox.checked) {
         toggleSidebar();
       }
@@ -159,7 +112,6 @@
         if (!this.hasAttribute('target') && !this.href.startsWith('http') && 
             !this.href.startsWith('mailto') && !this.href.startsWith('tel')) {
           if (sidebarCheckbox.checked) {
-            console.log('Клик по пункту меню - закрытие');
             toggleSidebar();
           }
         }
