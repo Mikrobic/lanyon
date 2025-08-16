@@ -8,94 +8,39 @@
   <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
   <link rel="stylesheet" href="{{ '/public/css/syntax.css' | absolute_url }}">
   <style>
-    /* Стили для сайдбара и анимаций */
+    /* Дополнительные стили для анимации */
     .sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 18rem;
-      overflow-y: auto;
-      transform: translateX(-100%);
       transition: transform 0.3s ease;
-      z-index: 10;
-      background-color: #f5f5f5;
+      transform: translateX(-100%);
     }
-    
     .sidebar-checkbox:checked ~ .sidebar {
       transform: translateX(0);
     }
-    
-    .sidebar-toggle {
-      position: fixed;
-      top: 0.5rem;
-      left: 0.5rem;
-      width: 2rem;
-      height: 2rem;
-      padding: 0.5rem;
-      cursor: pointer;
-      z-index: 20;
-    }
-    
-    .sidebar-toggle:before {
-      content: '';
-      display: block;
-      width: 100%;
-      height: 0.25rem;
-      background: #505050;
-      box-shadow: 0 0.5rem 0 0 #505050, 0 1rem 0 0 #505050;
-    }
-    
     .sidebar-nav-group .sidebar-submenu {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.3s ease;
     }
-    
     .sidebar-nav-group.active .sidebar-submenu {
       max-height: 500px;
     }
-    
     .toggle-icon {
       transition: transform 0.3s ease;
     }
-    
     .sidebar-nav-group.active .toggle-icon {
       transform: rotate(180deg);
     }
-    
-    @media (min-width: 48em) {
-      .sidebar {
-        transform: translateX(0) !important;
-      }
-      .sidebar-toggle {
-        display: none;
-      }
-    }
-    
-    /* Затемнение фона при открытом сайдбаре */
-    .sidebar-overlay {
+    .sidebar-toggle {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 9;
-      display: none;
-    }
-    
-    .sidebar-checkbox:checked ~ .sidebar-overlay {
-      display: block;
+      top: 0.5rem;
+      left: 0.5rem;
+      z-index: 100;
     }
   </style>
 </head>
 
 <body class="theme-base-0d">
   <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
-  
-  <!-- Затемнение фона -->
-  <div class="sidebar-overlay"></div>
 
   <div class="sidebar" id="sidebar">
     <div class="sidebar-item">
@@ -132,69 +77,64 @@
 
   <script>
   (function(document) {
-    // Инициализация элементов
     const sidebarCheckbox = document.getElementById('sidebar-checkbox');
     const sidebarToggle = document.querySelector('.sidebar-toggle');
     const sidebar = document.getElementById('sidebar');
-    const overlay = document.querySelector('.sidebar-overlay');
-    
-    // Проверяем состояние при загрузке
-    function checkInitialState() {
-      if (window.innerWidth >= 768) {
+
+    // Инициализация состояния
+    function initSidebar() {
+      const savedState = localStorage.getItem('sidebarState');
+      const isLargeScreen = window.innerWidth >= 768;
+      
+      if (isLargeScreen) {
         sidebarCheckbox.checked = true;
       } else {
-        sidebarCheckbox.checked = localStorage.getItem('sidebarState') === 'open';
+        sidebarCheckbox.checked = savedState === 'open';
       }
     }
-    
-    // Сохраняем состояние в localStorage
-    function saveSidebarState() {
-      localStorage.setItem('sidebarState', sidebarCheckbox.checked ? 'open' : 'closed');
-    }
-    
-    // Переключение состояния сайдбара
+
+    initSidebar();
+
+    // Обработчик изменений состояния
+    sidebarCheckbox.addEventListener('change', function() {
+      localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
+    });
+
+    // Функция переключения сайдбара
     function toggleSidebar() {
       sidebarCheckbox.checked = !sidebarCheckbox.checked;
-      saveSidebarState();
+      sidebarCheckbox.dispatchEvent(new Event('change'));
     }
-    
-    // Инициализация
-    checkInitialState();
-    
-    // Обработчики событий
-    sidebarCheckbox.addEventListener('change', saveSidebarState);
-    
+
     // Обработчик клика по гамбургеру
     sidebarToggle.addEventListener('click', function(e) {
       e.preventDefault();
       toggleSidebar();
     });
-    
-    // Закрытие при клике на оверлей или вне сайдбара
-    overlay.addEventListener('click', function() {
-      toggleSidebar();
+
+    // Закрытие при клике вне сайдбара
+    document.addEventListener('click', function(e) {
+      if (!sidebar.contains(e.target) {
+        if (sidebarCheckbox.checked && e.target !== sidebarToggle) {
+          toggleSidebar();
+        }
+      }
     });
-    
-    // Закрытие при клике на пункты меню (кроме внешних ссылок)
+
+    // Закрытие при клике на пункты меню
     document.querySelectorAll('.sidebar-nav-item:not(.sidebar-nav-toggle)').forEach(item => {
-      item.addEventListener('click', function(e) {
-        if (!this.hasAttribute('target') && 
-            !this.href.startsWith('http') && 
-            !this.href.startsWith('mailto') && 
-            !this.href.startsWith('tel')) {
-          if (window.innerWidth < 768 && sidebarCheckbox.checked) {
-            toggleSidebar();
-          }
+      item.addEventListener('click', function() {
+        if (window.innerWidth < 768 && sidebarCheckbox.checked) {
+          setTimeout(toggleSidebar, 100);
         }
       });
     });
-    
-    // Обработка раскрывающихся меню
+
+    // Обработчики для раскрывающихся меню
     document.querySelectorAll('.sidebar-nav-toggle').forEach(button => {
       const group = button.closest('.sidebar-nav-group');
       const menuId = 'menu_' + group.querySelector('a').textContent.trim().toLowerCase();
       
-      // Восстановление состояния
       if (localStorage.getItem(menuId) === 'open') {
         group.classList.add('active');
       }
@@ -206,8 +146,8 @@
         localStorage.setItem(menuId, group.classList.contains('active') ? 'open' : 'closed');
       });
     });
-    
-    // Обработка изменения размера окна
+
+    // Адаптация к изменению размера экрана
     window.addEventListener('resize', function() {
       if (window.innerWidth >= 768) {
         sidebarCheckbox.checked = true;
