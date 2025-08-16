@@ -62,11 +62,7 @@
     0 16px 0 0 #505050;
 }
 
-@media (min-width: 48em) {
-  .sidebar-toggle {
-    display: none;
-  }
-}
+
 
 /* Prevent scroll on narrow devices */
 html,
@@ -326,11 +322,6 @@ a.sidebar-nav-item:focus {
   }
 }
 
-@media print {
-  .sidebar-toggle {
-    display: none;
-  }
-}
 
 /* Slide effect */
 .wrap,
