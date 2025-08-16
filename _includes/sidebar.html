@@ -63,23 +63,6 @@
       localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
     });
 
-    // Оригинальный код для закрытия сайдбара
-    sidebar.addEventListener('click', function(e) {
-      if (e.target === sidebar && checkbox.checked) {
-        checkbox.checked = false;
-        localStorage.setItem('sidebarState', 'closed');
-        e.stopPropagation();
-      }
-    });
-
-    if (toggle) {
-      toggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        checkbox.checked = !checkbox.checked;
-        localStorage.setItem('sidebarState', checkbox.checked ? 'open' : 'closed');
-      });
-    }
-
     // Закрытие сайдбара при клике вне его
     document.addEventListener('click', function(e) {
       var target = e.target;
