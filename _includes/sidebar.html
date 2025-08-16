@@ -21,9 +21,18 @@
       overflow: hidden;
       transition: max-height 0.3s ease;
     }
-    .sidebar-nav-group.active .sidebar-submenu {
-      max-height: 500px;
+    .sidebar-submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding-left: 1.5rem;
+    display: none;
     }
+  
+    .sidebar-nav-group.active .sidebar-submenu {
+    max-height: 500px;
+    display: block;
+     }
     .submenu-item {
       position: relative;
       padding-left: 15px !important;
