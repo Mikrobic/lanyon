@@ -5,9 +5,21 @@
   <!-- Ваши мета-теги -->
   <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
   <style>
-    /* Дополнительные стили только для анимации */
+    /* Дополнительные стили */
     .sidebar {
       transition: transform 0.3s ease;
+    }
+    /* Стили для кнопки закрытия внутри сайдбара */
+    .sidebar-close-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none; /* По умолчанию скрыта */
+    }
+    .sidebar-checkbox:checked ~ .sidebar .sidebar-close-toggle {
+      display: block; /* Показываем только когда сайдбар открыт */
     }
   </style>
 </head>
@@ -18,6 +30,9 @@
 
   <!-- Toggleable sidebar -->
   <div class="sidebar" id="sidebar">
+    <!-- Кнопка закрытия внутри сайдбара -->
+    <label for="sidebar-checkbox" class="sidebar-close-toggle">×</label>
+    
     <div class="sidebar-item">
       <p>{{ site.description }}</p>
     </div>
@@ -50,13 +65,15 @@
     </nav>
   </div>
 
-  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  <!-- Основная кнопка открытия -->
+  <label for="sidebar-checkbox" class="sidebar-toggle">☰</label>
 
   <script>
   (function(document) {
     // Сохраняем состояние сайдбара
     const sidebarCheckbox = document.getElementById('sidebar-checkbox');
     const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebarCloseToggle = document.querySelector('.sidebar-close-toggle');
     const sidebar = document.getElementById('sidebar');
     
     // Восстановление состояния сайдбара
@@ -76,11 +93,22 @@
       sidebarCheckbox.dispatchEvent(event);
     }
 
-    // Обработчик клика по кнопке меню (гамбургер)
+    // Обработчик клика по кнопке открытия меню
     if (sidebarToggle) {
       sidebarToggle.addEventListener('click', function(e) {
         e.preventDefault();
         toggleSidebar();
+      });
+    }
+
+    // Обработчик клика по кнопке закрытия внутри сайдбара
+    if (sidebarCloseToggle) {
+      sidebarCloseToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (sidebarCheckbox.checked) {
+          toggleSidebar();
+        }
       });
     }
 
@@ -98,6 +126,7 @@
       if (!sidebarCheckbox.checked || 
           target === sidebarCheckbox || 
           target === sidebarToggle || 
+          target === sidebarCloseToggle ||
           sidebar.contains(target)) return;
       
       if (sidebarCheckbox.checked) {
