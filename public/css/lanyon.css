@@ -93,6 +93,20 @@ h1, h2, h3, h4, h5, h6 {
  * Super small header above the content for site name and short description.
  */
 
+
+.sidebar-nav-group.active .sidebar-submenu {
+  display: block;
+}
+
+.sidebar-nav-group.active .sidebar-nav-toggle .toggle-icon {
+  transform: rotate(180deg);
+}
+
+.toggle-icon {
+  transition: transform 0.3s ease;
+}
+
+
 .masthead {
   padding-top:    1rem;
   padding-bottom: 1rem;
