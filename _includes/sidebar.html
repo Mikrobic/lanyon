@@ -44,7 +44,6 @@
     </nav>
   </div>
 
-
   <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
   <script>
@@ -52,6 +51,7 @@
     // Сохраняем состояние сайдбара
     const sidebarCheckbox = document.getElementById('sidebar-checkbox');
     const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebar = document.getElementById('sidebar');
     
     // Восстановление состояния сайдбара
     if (localStorage.getItem('sidebarState') === 'open') {
@@ -63,41 +63,39 @@
       localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
     });
 
-    // Оригинальный код для закрытия сайдбара
-    var sidebar = document.querySelector('#sidebar');
-
-    // Закрытие сайдбара при клике на него
-    sidebar.addEventListener('click', function(e) {
-      if (e.target === sidebar && sidebarCheckbox.checked) {
-        // Используем клик по toggle для закрытия, чтобы сохранить анимацию
-        sidebarToggle.click();
-        e.stopPropagation();
-      }
-    });
-
+    // Обработчик клика по кнопке меню (гамбургер)
     if (sidebarToggle) {
       sidebarToggle.addEventListener('click', function(e) {
         e.preventDefault();
+        // Переключаем состояние - это обеспечит и открытие и закрытие
         sidebarCheckbox.checked = !sidebarCheckbox.checked;
-        localStorage.setItem('sidebarState', sidebarCheckbox.checked ? 'open' : 'closed');
+        // Триггерим событие change для обновления localStorage
+        const event = new Event('change');
+        sidebarCheckbox.dispatchEvent(event);
       });
     }
 
+    // Закрытие при клике вне сайдбара
     document.addEventListener('click', function(e) {
-      var target = e.target;
-      if (!sidebarCheckbox.checked || sidebar.contains(target) || target === sidebarCheckbox) return;
-      // Используем клик по toggle для закрытия
-      sidebarToggle.click();
+      const target = e.target;
+      if (!sidebarCheckbox.checked || 
+          target === sidebarCheckbox || 
+          target === sidebarToggle || 
+          sidebar.contains(target)) return;
+      
+      sidebarCheckbox.checked = false;
+      localStorage.setItem('sidebarState', 'closed');
     });
 
-    // Закрытие сайдбара при клике на пункты меню (кроме toggle-кнопки)
+    // Закрытие сайдбара при клике на пункты меню (кроме toggle-кнопки и внешних ссылок)
     const navItems = document.querySelectorAll('.sidebar-nav-item:not(.sidebar-nav-toggle)');
     navItems.forEach(item => {
       item.addEventListener('click', function(e) {
-        // Проверяем, что это не внешняя ссылка (например, телеграм)
-        if (this.getAttribute('target') !== '_blank' && !this.href.startsWith('http') && !this.href.startsWith('mailto') && !this.href.startsWith('tel')) {
+        // Проверяем, что это не внешняя ссылка
+        if (!this.hasAttribute('target') && !this.href.startsWith('http') && 
+            !this.href.startsWith('mailto') && !this.href.startsWith('tel')) {
           if (sidebarCheckbox.checked) {
-            // Используем клик по toggle для закрытия
+            // Закрываем через имитацию клика по toggle для сохранения анимации
             sidebarToggle.click();
           }
         }
@@ -127,18 +125,6 @@
           localStorage.setItem(menuId, group.classList.contains('active') ? 'open' : 'closed');
         });
       });
-
-
-        if (sidebarToggle) {
-          sidebarToggle.addEventListener('click', function(e) {
-          e.preventDefault();
-          // Просто переключаем состояние - это обеспечит и открытие и закрытие
-          sidebarCheckbox.checked = !sidebarCheckbox.checked;
-        // Триггерим событие change для обновления localStorage
-          const event = new Event('change');
-          sidebarCheckbox.dispatchEvent(event);
-      });
-    }
 
       // Автоматически раскрываем меню для активной страницы
       const activeSubItem = document.querySelector('.sidebar-submenu .active');
