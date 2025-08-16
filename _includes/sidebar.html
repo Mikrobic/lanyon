@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
   <link rel="stylesheet" href="{{ '/public/css/syntax.css' | absolute_url }}">
   <style>
-    /* Дополнительные стили для анимации */
+    /* Основные стили сайдбара */
     .sidebar {
       transition: transform 0.3s ease;
       transform: translateX(-100%);
@@ -16,44 +16,43 @@
     .sidebar-checkbox:checked ~ .sidebar {
       transform: translateX(0);
     }
-    .sidebar-nav-group .sidebar-submenu {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-    }
-    .sidebar-submenu {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    padding-left: 1.5rem;
-    display: none;
-    }
-  
-    .sidebar-nav-group.active .sidebar-submenu {
-    max-height: 500px;
-    display: block;
-     }
-    .submenu-item {
-      position: relative;
-      padding-left: 15px !important;
-    }
-
-    .toggle-icon {
-      transition: transform 0.3s ease;
-    }
-    .sidebar-nav-group.active .toggle-icon {
-      transform: rotate(180deg);
-    }
+    
+    /* Стили для кнопки гамбургера */
     .sidebar-toggle {
       position: fixed;
       top: 0.5rem;
       left: 0.5rem;
       z-index: 100;
     }
-
-
-
-</style>
+    
+    /* Стили для подменю */
+    .sidebar-nav-group .sidebar-submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding-left: 1.5rem;
+      display: none;
+    }
+    
+    .sidebar-nav-group.active .sidebar-submenu {
+      max-height: 500px;
+      display: block;
+    }
+    
+    .submenu-item {
+      position: relative;
+      padding-left: 15px !important;
+    }
+    
+    /* Стили для иконки */
+    .toggle-icon {
+      transition: transform 0.3s ease;
+    }
+    
+    .sidebar-nav-group.active .toggle-icon {
+      transform: rotate(180deg);
+    }
+  </style>
 </head>
 
 <body class="theme-base-0d">
