@@ -73,6 +73,40 @@ h1, h2, h3, h4, h5, h6 {
  * Center the page content.
  */
 
+/* Стили для раскрывающегося меню */
+.sidebar-nav-group {
+  position: relative;
+}
+
+.sidebar-submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding-left: 1rem;
+}
+
+.sidebar-nav-group.active .sidebar-submenu {
+  max-height: 500px; /* Достаточно большое значение для анимации */
+}
+
+.sidebar-nav-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-icon {
+  width: 1em;
+  height: 1em;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-nav-group.active .toggle-icon {
+  transform: rotate(180deg);
+}
+
+
+
 .container {
   max-width: 28rem;
 }
