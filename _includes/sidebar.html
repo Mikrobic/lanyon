@@ -4,6 +4,26 @@
 <head>
   <!-- Ваши мета-теги -->
   <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
+  <style>
+    /* Добавляем дополнительные стили для надежности */
+    .sidebar-checkbox:checked ~ .sidebar {
+      transform: translateX(0);
+      visibility: visible;
+    }
+    .sidebar-checkbox:not(:checked) ~ .sidebar {
+      transform: translateX(-100%);
+      visibility: hidden;
+    }
+    .sidebar {
+      transition: transform 0.3s ease, visibility 0.3s;
+      will-change: transform;
+      z-index: 100;
+    }
+    .sidebar-toggle {
+      z-index: 101;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body class="theme-base-0d">
@@ -44,7 +64,7 @@
     </nav>
   </div>
 
-  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  <label for="sidebar-checkbox" class="sidebar-toggle">☰</label>
 
   <script>
   (function(document) {
@@ -56,25 +76,55 @@
     // Восстановление состояния сайдбара
     if (localStorage.getItem('sidebarState') === 'open') {
       sidebarCheckbox.checked = true;
+      // Принудительно применяем стили при загрузке
+      setTimeout(() => {
+        sidebar.style.transform = 'translateX(0)';
+        sidebar.style.visibility = 'visible';
+      }, 10);
     }
 
-    // Обработчик изменений состояния сайдбара
+    // Улучшенный обработчик изменений состояния сайдбара
     sidebarCheckbox.addEventListener('change', function() {
+      console.log('Состояние чекбокса изменилось:', this.checked);
       localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
+      
+      // Принудительное применение стилей
+      if (this.checked) {
+        sidebar.style.transform = 'translateX(0)';
+        sidebar.style.visibility = 'visible';
+      } else {
+        sidebar.style.transform = 'translateX(-100%)';
+        sidebar.style.visibility = 'hidden';
+      }
     });
 
-    // Унифицированная функция для переключения сайдбара
+    // Улучшенная функция для переключения сайдбара
     function toggleSidebar() {
-      sidebarCheckbox.checked = !sidebarCheckbox.checked;
-      // Триггерим событие change для обновления localStorage
-      const event = new Event('change');
-      sidebarCheckbox.dispatchEvent(event);
+      const newState = !sidebarCheckbox.checked;
+      console.log('Переключение сайдбара. Текущее состояние:', sidebarCheckbox.checked, 'Новое состояние:', newState);
+      
+      sidebarCheckbox.checked = newState;
+      
+      // Двойное триггерирование для надежности
+      const changeEvent = new Event('change', { bubbles: true });
+      sidebarCheckbox.dispatchEvent(changeEvent);
+      
+      // Дополнительная проверка через 10мс
+      setTimeout(() => {
+        if (sidebarCheckbox.checked !== newState) {
+          console.warn('Состояние не изменилось, принудительно обновляем');
+          sidebarCheckbox.checked = newState;
+          sidebarCheckbox.dispatchEvent(new Event('change'));
+        }
+      }, 10);
     }
 
-    // Обработчик клика по кнопке меню (гамбургер)
+    // Улучшенный обработчик клика по кнопке меню (гамбургер)
     if (sidebarToggle) {
       sidebarToggle.addEventListener('click', function(e) {
+        console.log('Гамбургер кликнут');
         e.preventDefault();
+        e.stopPropagation();
         toggleSidebar();
       });
     }
@@ -82,6 +132,7 @@
     // Закрытие сайдбара при клике на него
     sidebar.addEventListener('click', function(e) {
       if (e.target === sidebar && sidebarCheckbox.checked) {
+        console.log('Клик по сайдбару - закрытие');
         toggleSidebar();
         e.stopPropagation();
       }
@@ -95,19 +146,20 @@
           target === sidebarToggle || 
           sidebar.contains(target)) return;
       
+      console.log('Клик вне сайдбара - закрытие');
       if (sidebarCheckbox.checked) {
         toggleSidebar();
       }
     });
 
-    // Закрытие сайдбара при клике на пункты меню (кроме toggle-кнопки и внешних ссылок)
+    // Закрытие сайдбара при клике на пункты меню
     const navItems = document.querySelectorAll('.sidebar-nav-item:not(.sidebar-nav-toggle)');
     navItems.forEach(item => {
       item.addEventListener('click', function(e) {
-        // Проверяем, что это не внешняя ссылка
         if (!this.hasAttribute('target') && !this.href.startsWith('http') && 
             !this.href.startsWith('mailto') && !this.href.startsWith('tel')) {
           if (sidebarCheckbox.checked) {
+            console.log('Клик по пункту меню - закрытие');
             toggleSidebar();
           }
         }
@@ -121,7 +173,6 @@
       toggleButtons.forEach(button => {
         const group = button.closest('.sidebar-nav-group');
         
-        // Восстановление состояния меню из localStorage
         const menuId = 'menu_' + group.querySelector('a').textContent.trim().toLowerCase();
         if (localStorage.getItem(menuId) === 'open') {
           group.classList.add('active');
@@ -132,13 +183,11 @@
           e.stopPropagation();
           group.classList.toggle('active');
           
-          // Сохранение состояния меню в localStorage
           const menuId = 'menu_' + group.querySelector('a').textContent.trim().toLowerCase();
           localStorage.setItem(menuId, group.classList.contains('active') ? 'open' : 'closed');
         });
       });
 
-      // Автоматически раскрываем меню для активной страницы
       const activeSubItem = document.querySelector('.sidebar-submenu .active');
       if (activeSubItem) {
         const parentGroup = activeSubItem.closest('.sidebar-nav-group');
