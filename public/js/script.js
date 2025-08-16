@@ -1,26 +1,30 @@
-;(function (document) {
-  var toggle = document.querySelector('.sidebar-toggle')
-  var sidebar = document.querySelector('#sidebar')
-  var checkbox = document.querySelector('#sidebar-checkbox')
+(function(document) {
+  var toggle = document.querySelector('.sidebar-toggle');
+  var sidebar = document.querySelector('#sidebar');
+  var checkbox = document.querySelector('#sidebar-checkbox');
 
-  document.addEventListener('click', function (e) {
-    var target = e.target
+  document.addEventListener('click', function(e) {
+    var target = e.target;
 
-    // Toggle sidebar when clicking sidebar toggle or checkbox
-    if (target === checkbox || target === toggle || target.closest('.sidebar-toggle')) {
-      checkbox.checked = !checkbox.checked
-      document.body.classList.toggle('sidebar-open', checkbox.checked)
-      return
-    }
+    if(!checkbox.checked ||
+       sidebar.contains(target) ||
+       (target === checkbox || target === toggle)) return;
 
-    // Close sidebar when clicking outside
-    if (!checkbox.checked || sidebar.contains(target)) return
-    checkbox.checked = false
-    document.body.classList.remove('sidebar-open')
-  })
+    checkbox.checked = false;
+  }, false);
 
-  // Sync checkbox state with body class
-  checkbox.addEventListener('change', function () {
-    document.body.classList.toggle('sidebar-open', this.checked)
-  })
-})(document)
+
+ function checkMobile() {
+  if (window.innerWidth <= 768) {
+    document.body.classList.add('mobile-view');
+    // Закрываем сайдбар по умолчанию на мобильных
+    sidebarCheckbox.checked = false;
+  } else {
+    document.body.classList.remove('mobile-view');
+  }
+}
+
+// Проверяем при загрузке и при изменении размера окна
+window.addEventListener('load', checkMobile);
+window.addEventListener('resize', checkMobile);
+})(document);
