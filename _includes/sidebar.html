@@ -63,17 +63,29 @@
       localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
     });
 
+    // Унифицированная функция для переключения сайдбара
+    function toggleSidebar() {
+      sidebarCheckbox.checked = !sidebarCheckbox.checked;
+      // Триггерим событие change для обновления localStorage
+      const event = new Event('change');
+      sidebarCheckbox.dispatchEvent(event);
+    }
+
     // Обработчик клика по кнопке меню (гамбургер)
     if (sidebarToggle) {
       sidebarToggle.addEventListener('click', function(e) {
         e.preventDefault();
-        // Переключаем состояние - это обеспечит и открытие и закрытие
-        sidebarCheckbox.checked = !sidebarCheckbox.checked;
-        // Триггерим событие change для обновления localStorage
-        const event = new Event('change');
-        sidebarCheckbox.dispatchEvent(event);
+        toggleSidebar();
       });
     }
+
+    // Закрытие сайдбара при клике на него
+    sidebar.addEventListener('click', function(e) {
+      if (e.target === sidebar && sidebarCheckbox.checked) {
+        toggleSidebar();
+        e.stopPropagation();
+      }
+    });
 
     // Закрытие при клике вне сайдбара
     document.addEventListener('click', function(e) {
@@ -83,8 +95,9 @@
           target === sidebarToggle || 
           sidebar.contains(target)) return;
       
-      sidebarCheckbox.checked = false;
-      localStorage.setItem('sidebarState', 'closed');
+      if (sidebarCheckbox.checked) {
+        toggleSidebar();
+      }
     });
 
     // Закрытие сайдбара при клике на пункты меню (кроме toggle-кнопки и внешних ссылок)
@@ -95,8 +108,7 @@
         if (!this.hasAttribute('target') && !this.href.startsWith('http') && 
             !this.href.startsWith('mailto') && !this.href.startsWith('tel')) {
           if (sidebarCheckbox.checked) {
-            // Закрываем через имитацию клика по toggle для сохранения анимации
-            sidebarToggle.click();
+            toggleSidebar();
           }
         }
       });
