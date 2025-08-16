@@ -12,4 +12,11 @@ order: 4
 </body>
 ```
 
-<img width="1086" height="357" alt="image" src="https://github.com/user-attachments/assets/310f9012-424f-46de-8eec-4ce83b332bb2" />
+<div class="enlarged-image-wrapper">
+  <div class="responsive-image-container" style="--aspect-ratio: 1000/200;">
+    <img src="{{ '/public/dashboard.jpg' | absolute_url }}" 
+         alt="Дашборд ресурсов компании"
+         class="enlarged-image"
+         loading="lazy">
+  </div>
+</div>
