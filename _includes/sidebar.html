@@ -43,30 +43,3 @@
       </div>
     </nav>
   </div>
-
-  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
-
-<script>
-  // Обработчики для раскрывающихся меню
-  (function(document) {  // <-- Добавлено открытие IIFE
-    document.addEventListener('DOMContentLoaded', function() {
-      const toggleButtons = document.querySelectorAll('.sidebar-nav-toggle');
-      
-      toggleButtons.forEach(button => {
-        const group = button.closest('.sidebar-nav-group');
-        
-        // Восстановление состояния меню из localStorage
-        const menuId = 'menu_' + group.querySelector('a').textContent.trim().toLowerCase();
-        if (localStorage.getItem(menuId) === 'open') {
-          group.classList.add('active');
-        }
-        
-        button.addEventListener('click', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          group.classList.toggle('active');
-    });
-  })(document);  // <-- Теперь это корректное закрытие IIFE
-</script>
-</body>
-</html>
