@@ -46,8 +46,9 @@
 
   <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
-  <script>
-    // Обработчики для раскрывающихся меню
+<script>
+  // Обработчики для раскрывающихся меню
+  (function(document) {  // <-- Добавлено открытие IIFE
     document.addEventListener('DOMContentLoaded', function() {
       const toggleButtons = document.querySelectorAll('.sidebar-nav-toggle');
       
@@ -82,7 +83,7 @@
         }
       }
     });
-  })(document);
-  </script>
+  })(document);  // <-- Теперь это корректное закрытие IIFE
+</script>
 </body>
 </html>
