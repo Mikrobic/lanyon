@@ -8,32 +8,33 @@
     <p>{{ site.description }}</p>
   </div>
   
-    <nav class="sidebar-nav">
-      <!-- Page order -->
-      <a class="sidebar-nav-item" href="{{ site.baseurl }}/for_me/">Обо мне</a>
-      <a class="sidebar-nav-item" href="{{ site.baseurl }}/stack/">Стек</a>
-      <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">Карьерный трек</a>
+  <nav class="sidebar-nav">
+    <!-- Page order -->
+    <a class="sidebar-nav-item" href="{{ site.baseurl }}/for_me/">Обо мне</a>
+    <a class="sidebar-nav-item" href="{{ site.baseurl }}/stack/">Стек</a>
+    <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">Карьерный трек</a>
 
-      <!-- Nested project menu -->
-      <div class="sidebar-nav-group{% if page.url contains '/project/' %} active{% endif %}">
-        <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
-          Проекты
-          <svg class="toggle-icon" viewBox="0 0 24 24">
-            <path d="M7 10l5 5 5-5z"/>
-          </svg>
+    <!-- Nested project menu -->
+    <div class="sidebar-nav-group">
+      <input type="checkbox" id="projects-toggle" class="hidden">
+      <label for="projects-toggle" class="sidebar-nav-item sidebar-nav-toggle">
+        Проекты
+        <svg class="toggle-icon" viewBox="0 0 24 24">
+          <path d="M7 10l5 5 5-5z"/>
+        </svg>
+      </label>
+      <div class="sidebar-submenu">
+        <a href="{{ site.baseurl }}/project/subpage/" 
+           class="sidebar-nav-item submenu-item{% if page.url == '/project/subpage/' %} active{% endif %}">
+          Дашборд по учёту ёмкости ресурсов компании
         </a>
-        <div class="sidebar-submenu">
-          <a href="{{ site.baseurl }}/project/subpage/" 
-             class="sidebar-nav-item submenu-item{% if page.url == '/project/subpage/' %} active{% endif %}">
-            Дашборд по учёту ёмкости ресурсов компании
-          </a>
-        </div>
       </div>
+    </div>
 
-      <div class="sidebar-item">
-        <p>&copy; {{ site.time | date: '%Y' }}. Тимакин Сергей.</p>
-      </div>
-    </nav>
-  </div>
+    <div class="sidebar-item">
+      <p>&copy; {{ site.time | date: '%Y' }}. Тимакин Сергей.</p>
+    </div>
+  </nav>
+</div>
 
 <script src="{{ '/public/js/script.js' | absolute_url }}"></script>
