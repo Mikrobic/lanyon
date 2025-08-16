@@ -9,6 +9,66 @@
     .sidebar {
       transition: transform 0.3s ease;
     }
+    
+    /* Стили для гамбургера */
+    .sidebar-toggle {
+      cursor: pointer;
+      padding: 0.5rem;
+      background: transparent;
+      border: none;
+      position: fixed;
+      z-index: 3;
+      left: 1rem;
+      top: 1rem;
+    }
+    
+    .sidebar-toggle:before {
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: #505050;
+      position: absolute;
+      left: 0.5rem;
+      top: 1rem;
+      content: '';
+      transition: all 0.3s ease;
+    }
+    
+    .sidebar-toggle:after {
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: #505050;
+      position: absolute;
+      left: 0.5rem;
+      top: 1.5rem;
+      content: '';
+      transition: all 0.3s ease;
+    }
+    
+    .sidebar-toggle .sidebar-toggle-line {
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: inherit;
+      position: absolute;
+      left: 0.5rem;
+      top: 1.25rem;
+      transition: all 0.3s ease;
+    }
+    
+    /* Анимация при открытом сайдбаре */
+    #sidebar-checkbox:checked ~ .sidebar-toggle:before {
+      transform: translateY(0.25rem) rotate(45deg);
+    }
+    
+    #sidebar-checkbox:checked ~ .sidebar-toggle:after {
+      transform: translateY(-0.25rem) rotate(-45deg);
+    }
+    
+    #sidebar-checkbox:checked ~ .sidebar-toggle .sidebar-toggle-line {
+      opacity: 0;
+    }
   </style>
 </head>
 
@@ -18,39 +78,86 @@
 
   <!-- Toggleable sidebar -->
   <div class="sidebar" id="sidebar">
-    <div class="sidebar-item">
-      <p>{{ site.description }}</p>
-    </div>
-
-    <nav class="sidebar-nav">
-      <!-- Page order -->
-      <a class="sidebar-nav-item" href="{{ site.baseurl }}/for_me/">Обо мне</a>
-      <a class="sidebar-nav-item" href="{{ site.baseurl }}/stack/">Стек</a>
-      <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">Карьерный трек</a>
-
-      <!-- Nested project menu -->
-      <div class="sidebar-nav-group{% if page.url contains '/project/' %} active{% endif %}">
-        <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
-          Проекты
-          <svg class="toggle-icon" viewBox="0 0 24 24">
-            <path d="M7 10l5 5 5-5z"/>
-          </svg>
-        </a>
-        <div class="sidebar-submenu">
-          <a href="{{ site.baseurl }}/project/subpage/" 
-             class="sidebar-nav-item {% if page.url == '/project/subpage/' %} active{% endif %}">
-            Дашборд по учёту ёмкости ресурсов компании
+    <div class="container sidebar-sticky">
+      <div class="sidebar-about">
+        <h1>
+          <a href="{{ site.baseurl }}">
+            {{ site.title }}
           </a>
-        </div>
+        </h1>
+        <p class="lead">{{ site.description }}</p>
       </div>
 
-      <div class="sidebar-item">
-        <p>Телеграмм: <a href="https://t.me/SergeyTimakin" target="_blank">@SergeyTimakin</a></p>
-      </div>
-    </nav>
+      <nav class="sidebar-nav">
+        <a class="sidebar-nav-item{% if page.url == site.baseurl %} active{% endif %}" href="{{ site.baseurl }}">Home</a>
+
+        {% comment %}
+          The code below dynamically generates a sidebar nav of pages with
+          `layout: page` in the front-matter. See readme for usage.
+        {% endcomment %}
+
+        {% assign pages_list = site.pages | sort:"url" %}
+        {% for node in pages_list %}
+          {% if node.title != null %}
+            {% if node.layout == "page" %}
+              <a class="sidebar-nav-item{% if page.url == node.url %} active{% endif %}" href="{{ node.url }}">{{ node.title }}</a>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        <!-- Page order -->
+        <a class="sidebar-nav-item" href="{{ site.baseurl }}/for_me/">Обо мне</a>
+        <a class="sidebar-nav-item" href="{{ site.baseurl }}/stack/">Стек</a>
+        <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">Карьерный трек</a>
+
+        <!-- Nested project menu -->
+        <div class="sidebar-nav-group{% if page.url contains '/project/' %} active{% endif %}">
+          <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
+            Проекты
+            <svg class="toggle-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z"/>
+            </svg>
+          </a>
+          <div class="sidebar-submenu">
+            <a href="{{ site.baseurl }}/project/subpage/" 
+               class="sidebar-nav-item {% if page.url == '/project/subpage/' %} active{% endif %}">
+              Дашборд по учёту ёмкости ресурсов компании
+            </a>
+          </div>
+        </div>
+
+        <a class="sidebar-nav-item" href="{{ site.github.repo }}">GitHub project</a>
+        <span class="sidebar-nav-item">Currently v{{ site.version }}</span>
+        
+        <div class="sidebar-item">
+          <p>Телеграмм: <a href="https://t.me/SergeyTimakin" target="_blank">@SergeyTimakin</a></p>
+        </div>
+      </nav>
+
+      <p>&copy; {{ site.time | date: '%Y' }}. All rights reserved.</p>
+    </div>
   </div>
 
-  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  <label for="sidebar-checkbox" class="sidebar-toggle">
+    <span class="sidebar-toggle-line"></span>
+  </label>
+
+  <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+       content to avoid any CSS collisions with our real content. -->
+  <div class="wrap">
+    <div class="masthead">
+      <div class="container">
+        <h3 class="masthead-title">
+          <a href="{{ site.baseurl }}" title="Home">{{ site.title }}</a>
+          <small>{{ site.tagline }}</small>
+        </h3>
+      </div>
+    </div>
+
+    <div class="container content">
+      {{ content }}
+    </div>
+  </div>
 
   <script>
   (function(document) {
@@ -62,11 +169,13 @@
     // Восстановление состояния сайдбара
     if (localStorage.getItem('sidebarState') === 'open') {
       sidebarCheckbox.checked = true;
+      document.body.classList.add('sidebar-open');
     }
 
     // Обработчик изменений состояния сайдбара
     sidebarCheckbox.addEventListener('change', function() {
       localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
+      document.body.classList.toggle('sidebar-open', this.checked);
     });
 
     // Функция для переключения сайдбара

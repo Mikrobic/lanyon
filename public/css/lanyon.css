@@ -417,6 +417,105 @@ a.pagination-item:hover {
   }
 }
 
+/* Modify existing sidebar-toggle styles */
+.sidebar-toggle {
+  cursor: pointer;
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  position: fixed;
+  z-index: 3;
+  left: 1rem;
+  top: 1rem;
+}
+
+.sidebar-toggle:before {
+  display: block;
+  width: 1.5rem;
+  height: 2px;
+  background: #505050;
+  position: absolute;
+  left: 0.5rem;
+  top: 1rem;
+  content: '';
+  transition: all 0.3s ease;
+}
+
+.sidebar-toggle:after {
+  display: block;
+  width: 1.5rem;
+  height: 2px;
+  background: #505050;
+  position: absolute;
+  left: 0.5rem;
+  top: 1.5rem;
+  content: '';
+  transition: all 0.3s ease;
+}
+
+.theme-base-08 .sidebar-toggle:before,
+.theme-base-08 .sidebar-toggle:after {
+  background: #ac4142;
+}
+
+.theme-base-09 .sidebar-toggle:before,
+.theme-base-09 .sidebar-toggle:after {
+  background: #d28445;
+}
+
+.theme-base-0a .sidebar-toggle:before,
+.theme-base-0a .sidebar-toggle:after {
+  background: #f4bf75;
+}
+
+.theme-base-0b .sidebar-toggle:before,
+.theme-base-0b .sidebar-toggle:after {
+  background: #90a959;
+}
+
+.theme-base-0c .sidebar-toggle:before,
+.theme-base-0c .sidebar-toggle:after {
+  background: #75b5aa;
+}
+
+.theme-base-0d .sidebar-toggle:before,
+.theme-base-0d .sidebar-toggle:after {
+  background: #6a9fb5;
+}
+
+.theme-base-0e .sidebar-toggle:before,
+.theme-base-0e .sidebar-toggle:after {
+  background: #aa759f;
+}
+
+.theme-base-0f .sidebar-toggle:before,
+.theme-base-0f .sidebar-toggle:after {
+  background: #8f5536;
+}
+
+/* Animation when sidebar is visible */
+.sidebar-open .sidebar-toggle:before {
+  transform: translateY(0.25rem) rotate(45deg);
+}
+
+.sidebar-open .sidebar-toggle:after {
+  transform: translateY(-0.25rem) rotate(-45deg);
+}
+
+.sidebar-toggle .sidebar-toggle-line {
+  display: block;
+  width: 1.5rem;
+  height: 2px;
+  background: inherit;
+  position: absolute;
+  left: 0.5rem;
+  top: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.sidebar-open .sidebar-toggle .sidebar-toggle-line {
+  opacity: 0;
+}
 
 /*
  * Reverse layout
