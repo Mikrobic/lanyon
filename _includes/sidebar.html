@@ -23,6 +23,7 @@
       top: 0.5rem;
       left: 0.5rem;
       z-index: 100;
+      cursor: pointer;
     }
     
     /* Стили для подменю */
@@ -31,22 +32,23 @@
       overflow: hidden;
       transition: max-height 0.3s ease;
       padding-left: 1.5rem;
-      display: none;
     }
     
     .sidebar-nav-group.active .sidebar-submenu {
       max-height: 500px;
-      display: block;
     }
     
-    .submenu-item {
-      position: relative;
-      padding-left: 15px !important;
+    .sidebar-nav-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
     }
     
-    /* Стили для иконки */
     .toggle-icon {
       transition: transform 0.3s ease;
+      width: 1em;
+      height: 1em;
     }
     
     .sidebar-nav-group.active .toggle-icon {
@@ -68,10 +70,9 @@
       <a class="sidebar-nav-item" href="{{ site.baseurl }}/stack/">Стек</a>
       <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">Карьерный трек</a>
 
-
       <!-- Nested project menu -->
       <div class="sidebar-nav-group{% if page.url contains '/project/' %} active{% endif %}">
-        <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
+        <a href="#" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
           Проекты
           <svg class="toggle-icon" viewBox="0 0 24 24">
             <path d="M7 10l5 5 5-5z"/>
@@ -85,9 +86,6 @@
         </div>
       </div>
 
-
-      
-
       <div class="sidebar-item">
         <p>Телеграмм: <a href="https://t.me/SergeyTimakin" target="_blank">@SergeyTimakin</a></p>
       </div>
@@ -98,11 +96,12 @@
 
   <script>
   (function(document) {
+    // Инициализация DOM элементов
     const sidebarCheckbox = document.getElementById('sidebar-checkbox');
     const sidebarToggle = document.querySelector('.sidebar-toggle');
     const sidebar = document.getElementById('sidebar');
 
-    // Инициализация состояния
+    // Инициализация сайдбара
     function initSidebar() {
       const savedState = localStorage.getItem('sidebarState');
       const isLargeScreen = window.innerWidth >= 768;
@@ -114,67 +113,78 @@
       }
     }
 
-    initSidebar();
-
-    // Обработчик изменений состояния
-    sidebarCheckbox.addEventListener('change', function() {
-      localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
-    });
-
-    // Функция переключения сайдбара
-    function toggleSidebar() {
-      sidebarCheckbox.checked = !sidebarCheckbox.checked;
-      sidebarCheckbox.dispatchEvent(new Event('change'));
+    // Инициализация подменю
+    function initDropdownMenus() {
+      document.querySelectorAll('.sidebar-nav-group').forEach(group => {
+        const menuId = 'menu_' + group.querySelector('a').textContent.trim().toLowerCase();
+        const savedState = localStorage.getItem(menuId);
+        
+        // Восстановление состояния из localStorage
+        if (savedState === 'open' || group.classList.contains('active')) {
+          group.classList.add('active');
+        }
+        
+        // Обработчик клика для переключения
+        const toggle = group.querySelector('.sidebar-nav-toggle');
+        if (toggle) {
+          toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            group.classList.toggle('active');
+            localStorage.setItem(menuId, group.classList.contains('active') ? 'open' : 'closed');
+          });
+        }
+      });
     }
 
-    // Обработчик клика по гамбургеру
-    sidebarToggle.addEventListener('click', function(e) {
-      e.preventDefault();
-      toggleSidebar();
-    });
-
-    // Закрытие при клике вне сайдбара
-    document.addEventListener('click', function(e) {
-      if (!sidebar.contains(e.target) {
-        if (sidebarCheckbox.checked && e.target !== sidebarToggle) {
-          toggleSidebar();
-        }
-      }
-    });
-
-    // Закрытие при клике на пункты меню
-    document.querySelectorAll('.sidebar-nav-item:not(.sidebar-nav-toggle)').forEach(item => {
-      item.addEventListener('click', function() {
-        if (window.innerWidth < 768 && sidebarCheckbox.checked) {
-          setTimeout(toggleSidebar, 100);
-        }
+    // Основная инициализация
+    document.addEventListener('DOMContentLoaded', function() {
+      initSidebar();
+      initDropdownMenus();
+      
+      // Обработчик изменений состояния сайдбара
+      sidebarCheckbox.addEventListener('change', function() {
+        localStorage.setItem('sidebarState', this.checked ? 'open' : 'closed');
       });
-    });
 
-    // Обработчики для раскрывающихся меню
-    document.querySelectorAll('.sidebar-nav-toggle').forEach(button => {
-      const group = button.closest('.sidebar-nav-group');
-      const menuId = 'menu_' + group.querySelector('a').textContent.trim().toLowerCase();
-      
-      if (localStorage.getItem(menuId) === 'open') {
-        group.classList.add('active');
+      // Функция переключения сайдбара
+      function toggleSidebar() {
+        sidebarCheckbox.checked = !sidebarCheckbox.checked;
+        sidebarCheckbox.dispatchEvent(new Event('change'));
       }
-      
-      button.addEventListener('click', function(e) {
+
+      // Обработчик клика по гамбургеру
+      sidebarToggle.addEventListener('click', function(e) {
         e.preventDefault();
-        e.stopPropagation();
-        group.classList.toggle('active');
-        localStorage.setItem(menuId, group.classList.contains('active') ? 'open' : 'closed');
+        toggleSidebar();
       });
-    });
 
-    // Адаптация к изменению размера экрана
-    window.addEventListener('resize', function() {
-      if (window.innerWidth >= 768) {
-        sidebarCheckbox.checked = true;
-      } else {
-        sidebarCheckbox.checked = localStorage.getItem('sidebarState') === 'open';
-      }
+      // Закрытие при клике вне сайдбара
+      document.addEventListener('click', function(e) {
+        if (!sidebar.contains(e.target) && e.target !== sidebarToggle) {
+          if (sidebarCheckbox.checked) {
+            toggleSidebar();
+          }
+        }
+      });
+
+      // Закрытие при клике на пункты меню (кроме переключателей подменю)
+      document.querySelectorAll('.sidebar-nav-item:not(.sidebar-nav-toggle)').forEach(item => {
+        item.addEventListener('click', function() {
+          if (window.innerWidth < 768 && sidebarCheckbox.checked) {
+            setTimeout(toggleSidebar, 100);
+          }
+        });
+      });
+
+      // Адаптация к изменению размера экрана
+      window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768) {
+          sidebarCheckbox.checked = true;
+        } else {
+          sidebarCheckbox.checked = localStorage.getItem('sidebarState') === 'open';
+        }
+      });
     });
   })(document);
   </script>
