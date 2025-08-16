@@ -1,29 +1,132 @@
 <!DOCTYPE html>
 <html lang="en-us">
 
-  {% include head.html %}
-  <body class="theme-base-0d">
-  <body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
+  <style>
+    /* Дополнительные гарантированные стили для сайдбара */
+    .sidebar {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .sidebar-checkbox:checked ~ .sidebar {
+      transform: translateX(0);
+    }
+    .sidebar-toggle {
+      position: fixed;
+      top: 0.5rem;
+      left: 0.5rem;
+      z-index: 100;
+    }
+  </style>
+</head>
 
-    {% include sidebar.html %}
+<body class="theme-base-0d">
+  <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
 
-    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
-         content to avoid any CSS collisions with our real content. -->
-    <div class="wrap">
-      <div class="masthead">
-        <div class="container">
-          <h3 class="masthead-title">
-          </h3>
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-item">
+      <p>{{ site.description }}</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="{{ site.baseurl }}/for_me/">Обо мне</a>
+      <a class="sidebar-nav-item" href="{{ site.baseurl }}/stack/">Стек</a>
+      <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">Карьерный трек</a>
+
+      <div class="sidebar-nav-group">
+        <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle">
+          Проекты
+          <svg class="toggle-icon" viewBox="0 0 24 24">
+            <path d="M7 10l5 5 5-5z"/>
+          </svg>
+        </a>
+        <div class="sidebar-submenu">
+          <a href="{{ site.baseurl }}/project/subpage/" class="sidebar-nav-item">
+            Дашборд по учёту ёмкости ресурсов компании
+          </a>
         </div>
       </div>
 
-      <div class="container content">
-        {{ content }}
+      <div class="sidebar-item">
+        <p>Телеграмм: <a href="https://t.me/SergeyTimakin" target="_blank">@SergeyTimakin</a></p>
       </div>
-    </div>
+    </nav>
+  </div>
 
-    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  <label for="sidebar-checkbox" class="sidebar-toggle">☰</label>
 
-    <script src='{{ site.baseurl }}/public/js/script.js'></script>
-  </body>
+  <main class="content">
+    {{ content }}
+  </main>
+
+  <script>
+  (function(document) {
+    const sidebarCheckbox = document.getElementById('sidebar-checkbox');
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebar = document.getElementById('sidebar');
+    
+    // Инициализация сайдбара
+    function initSidebar() {
+      // Восстановление состояния из localStorage
+      if (localStorage.getItem('sidebarState') === 'open') {
+        sidebarCheckbox.checked = true;
+        sidebar.style.transform = 'translateX(0)';
+      }
+      
+      // Обработчик клика по гамбургеру
+      sidebarToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        sidebarCheckbox.checked = !sidebarCheckbox.checked;
+        updateSidebarState();
+      });
+      
+      // Закрытие при клике вне сайдбара
+      document.addEventListener('click', function(e) {
+        if (!sidebarCheckbox.checked) return;
+        if (!sidebar.contains(e.target) && e.target !== sidebarToggle) {
+          sidebarCheckbox.checked = false;
+          updateSidebarState();
+        }
+      });
+      
+      // Закрытие при клике на пункты меню
+      document.querySelectorAll('.sidebar-nav-item').forEach(item => {
+        item.addEventListener('click', function() {
+          if (!this.classList.contains('sidebar-nav-toggle') && 
+              !this.hasAttribute('target') && 
+              !this.href.startsWith('http')) {
+            sidebarCheckbox.checked = false;
+            updateSidebarState();
+          }
+        });
+      });
+    }
+    
+    // Обновление состояния сайдбара
+    function updateSidebarState() {
+      localStorage.setItem('sidebarState', sidebarCheckbox.checked ? 'open' : 'closed');
+      sidebar.style.transform = sidebarCheckbox.checked ? 'translateX(0)' : 'translateX(-100%)';
+    }
+    
+    // Инициализация при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+      initSidebar();
+      
+      // Инициализация подменю
+      document.querySelectorAll('.sidebar-nav-toggle').forEach(button => {
+        const group = button.closest('.sidebar-nav-group');
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          group.classList.toggle('active');
+        });
+      });
+    });
+  })(document);
+  </script>
+</body>
 </html>
