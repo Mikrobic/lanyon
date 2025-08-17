@@ -25,13 +25,13 @@
               >
             </a>
             
-            <!-- Абсолютно центрированный текст -->
+            <!-- Абсолютно центрированный текст с адаптивным смещением -->
             <div style="
                  position: absolute;
                  left: 50%;
-                 top: 50%;
+                 top: calc(50% - 0.5vw); /* Смещение вверх на мобильных */
                  transform: translate(-50%, -50%);
-                 width: calc(100% - 120px); /* Учитываем место для аватарки */
+                 width: calc(100% - 120px);
                  text-align: center;
                  padding: 0 20px;
                  box-sizing: border-box;
