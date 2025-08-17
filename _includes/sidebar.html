@@ -24,12 +24,14 @@
 
       <!-- Nested project menu -->
       <div class="sidebar-nav-group{% if page.url contains '/project/' %} active{% endif %}">
-        <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
-          Проекты
-          <svg class="toggle-icon" viewBox="0 0 24 24">
-            <path d="M7 10l5 5 5-5z"/>
-          </svg>
-        </a>
+        <button class="sidebar-nav-toggle" aria-expanded="{% if page.url contains '/project/' %}true{% else %}false{% endif %}">
+          <span class="sidebar-nav-item">
+            Проекты
+            <svg class="toggle-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z"/>
+            </svg>
+          </span>
+        </button>
         <div class="sidebar-submenu">
           <a href="{{ site.baseurl }}/project/subpage/" 
              class="sidebar-nav-item submenu-item{% if page.url == '/project/subpage/' %} active{% endif %}">
