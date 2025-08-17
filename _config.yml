@@ -13,6 +13,25 @@ author:
   url: "https://vk.com/id228360884"
   email: "timakin1983@mail.ru"
 
+
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+      sidebar: true
+  
+  - scope:
+      path: "pages/project"
+      type: "pages"
+    values:
+      layout: "page"
+      parent: "project"
+      permalink: /:baseurl/project/:title/
+
+
+
 # Gems
 plugins:
   - jekyll-paginate
