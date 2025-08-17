@@ -22,24 +22,6 @@ plugins:
 version: "1.1.0"
 google_analytics_id: #UA-XXXX-Y
 
-# Defaults
-defaults:
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "page"
-      sidebar: true
-  
-  - scope:
-      path: "pages/project"
-      type: "pages"
-    values:
-      layout: "page"
-      parent: "project"
-      permalink: /:baseurl/project/:title/
-
-
 # Build settings
 markdown: kramdown
 highlighter: rouge
