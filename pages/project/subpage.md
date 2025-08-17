@@ -14,9 +14,10 @@ order: 4
 
 <div class="enlarged-image-wrapper">
   <div class="responsive-image-container" style="--aspect-ratio: 1000/200;">
-    <img src="{{ '/public/dashboard.jpg' | absolute_url }}" 
+    <img src="{{ 'https://github.com/Mikrobic/lanyon/blob/main/public/dasboard.jpg' | absolute_url }}" 
          alt="Дашборд ресурсов компании"
          class="enlarged-image"
          loading="lazy">
   </div>
 </div>
+
