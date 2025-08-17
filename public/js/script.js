@@ -1,4 +1,4 @@
-(function() {
+(function(document) {
   // Сохраняем состояние сайдбара
   const sidebarCheckbox = document.getElementById('sidebar-checkbox');
   
@@ -75,4 +75,4 @@
       }
     }
   });
-})();
+})(document);
