@@ -93,6 +93,36 @@ h1, h2, h3, h4, h5, h6 {
  * Super small header above the content for site name and short description.
  */
 
+
+/* Стили для контейнера */
+.masthead-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Стили для аватарки */
+.avatar-container {
+  margin-left: 20px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+}
+
 .masthead {
   padding-top:    1rem;
   padding-bottom: 1rem;
