@@ -1,8 +1,8 @@
-(function() {
-  // Основная функция для сайдбара
+document.addEventListener('DOMContentLoaded', function() {
+  // Функция для работы сайдбара
   function initSidebar() {
     const sidebarCheckbox = document.getElementById('sidebar-checkbox');
-    const sidebar = document.querySelector('#sidebar');
+    const sidebar = document.getElementById('sidebar');
     const sidebarToggle = document.querySelector('.sidebar-toggle');
 
     // Восстановление состояния
@@ -32,25 +32,26 @@
     }
 
     document.addEventListener('click', function(e) {
-      const target = e.target;
-      if (!sidebarCheckbox.checked || sidebar.contains(target) || target === sidebarCheckbox) return;
+      if (!sidebarCheckbox.checked || 
+          sidebar.contains(e.target) || 
+          e.target === sidebarCheckbox) return;
       sidebarCheckbox.checked = false;
       localStorage.setItem('sidebarState', 'closed');
     });
   }
 
-  // Функция для подменю
+  // Функция для работы подменю
   function initSubmenus() {
-    const toggleButtons = document.querySelectorAll('.sidebar-nav-toggle');
-    
-    toggleButtons.forEach(button => {
+    document.querySelectorAll('.sidebar-nav-toggle').forEach(button => {
       const group = button.closest('.sidebar-nav-group');
-      const menuId = 'menu_' + group.querySelector('a').textContent.trim().toLowerCase();
+      const menuId = 'menu_' + button.textContent.trim().toLowerCase();
       
+      // Восстановление состояния
       if (localStorage.getItem(menuId) === 'open') {
         group.classList.add('active');
       }
       
+      // Обработчик клика
       button.addEventListener('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -58,22 +59,20 @@
         localStorage.setItem(menuId, group.classList.contains('active') ? 'open' : 'closed');
       });
     });
-
-    // Автоматическое раскрытие для активной страницы
-    const activeSubItem = document.querySelector('.sidebar-submenu .active');
-    if (activeSubItem) {
-      const parentGroup = activeSubItem.closest('.sidebar-nav-group');
-      if (parentGroup) {
-        parentGroup.classList.add('active');
-        const menuId = 'menu_' + parentGroup.querySelector('a').textContent.trim().toLowerCase();
-        localStorage.setItem(menuId, 'open');
-      }
-    }
   }
 
-  // Инициализация после полной загрузки DOM
-  document.addEventListener('DOMContentLoaded', function() {
-    initSidebar();
-    initSubmenus();
-  });
-})();
+  // Инициализация
+  initSidebar();
+  initSubmenus();
+
+  // Автоматическое раскрытие активного меню
+  const activeSubItem = document.querySelector('.submenu-item.active');
+  if (activeSubItem) {
+    const parentGroup = activeSubItem.closest('.sidebar-nav-group');
+    if (parentGroup) {
+      parentGroup.classList.add('active');
+      const menuId = 'menu_' + parentGroup.querySelector('.sidebar-nav-toggle').textContent.trim().toLowerCase();
+      localStorage.setItem(menuId, 'open');
+    }
+  }
+});
