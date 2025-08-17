@@ -7,9 +7,33 @@
     <div class="wrap">
       <div class="masthead">
         <div class="container">
-          <div class="masthead-content" style="display: flex; flex-direction: column;">
-            <!-- Центрированный текст -->
-            <div style="text-align: center; margin-bottom: 15px;">
+          <div class="masthead-content" style="position: relative;">
+            <!-- Аватарка (остается слева) -->
+            <a href="https://web.telegram.org/k/#@SergeyTimakin" class="avatar-container" 
+               style="display: inline-block; vertical-align: middle;">
+              <img 
+                src="{{ '/public/dasboard.jpg' | absolute_url }}" 
+                class="avatar" 
+                style="
+                  width: clamp(60px, 15vw, 100px);
+                  height: clamp(60px, 15vw, 100px);
+                  border-radius: 50%;
+                  object-fit: cover;
+                  border: 2px solid #fff;
+                  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                "
+              >
+            </a>
+            
+            <!-- Центрированный текст (по центру мастреда) -->
+            <div style="
+                 position: absolute;
+                 left: 50%;
+                 top: 50%;
+                 transform: translate(-50%, -50%);
+                 text-align: center;
+                 width: 100%;
+               ">
               <h3 class="masthead-title" style="margin: 0; padding: 0;">
                 <a href="https://web.telegram.org/k/#@SergeyTimakin" 
                    title="Не Автор"
@@ -33,22 +57,6 @@
                 </small>
               </h3>
             </div>
-            
-            <!-- Аватарка (остается на своем месте) -->
-            <a href="https://web.telegram.org/k/#@SergeyTimakin" class="avatar-container">
-              <img 
-                src="{{ '/public/dasboard.jpg' | absolute_url }}" 
-                class="avatar" 
-                style="
-                  width: clamp(60px, 15vw, 100px);
-                  height: clamp(60px, 15vw, 100px);
-                  border-radius: 50%;
-                  object-fit: cover;
-                  border: 2px solid #fff;
-                  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-                "
-              >
-            </a>
           </div>
         </div>
       </div>
