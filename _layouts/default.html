@@ -8,9 +8,9 @@
       <div class="masthead">
         <div class="container">
           <div class="masthead-content" style="position: relative; min-height: 100px;">
-            <!-- Аватарка (справа) -->
+            <!-- Аватарка (справа и выше) -->
             <a href="https://web.telegram.org/k/#@SergeyTimakin" class="avatar-container" 
-               style="position: absolute; right: 0; top: 50%; transform: translateY(-50%);">
+               style="position: absolute; right: 0; top: 40%; transform: translateY(-50%);">
               <img 
                 src="{{ '/public/me.jpg' | absolute_url }}" 
                 class="avatar" 
@@ -25,11 +25,11 @@
               >
             </a>
             
-            <!-- Абсолютно центрированный текст с адаптивным смещением -->
+            <!-- Текст с увеличенным смещением вверх -->
             <div style="
                  position: absolute;
                  left: 50%;
-                 top: calc(50% - 0.5vw); /* Смещение вверх на мобильных */
+                 top: calc(40% - 1vw); /* Увеличенное смещение вверх */
                  transform: translate(-50%, -50%);
                  width: calc(100% - 120px);
                  text-align: center;
