@@ -9,20 +9,25 @@
 
     <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
          content to avoid any CSS collisions with our real content. -->
-    <div class="wrap">
-      <div class="masthead">
-        <div class="container">
-          <h3 class="masthead-title">
-            <a href="https://vk.com/id228360884" title="Не Автор">{{ site.title }}</a>
-            <small>{{ site.tagline }}</small>
-          </h3>
+         <div class="wrap">
+          <div class="masthead">
+            <div class="container">
+              <div class="masthead-content">
+                <h3 class="masthead-title">
+                  <a href="https://web.telegram.org/k/#@SergeyTimakin" title="Не Автор">{{ site.title }}</a>
+                  <small>{{ site.tagline }}</small>
+                </h3>
+                <a href="https://web.telegram.org/k/#@SergeyTimakin" class="avatar-container">
+                  <img src="{{ site.baseurl }}/images/avatar.jpg" alt="Тимакин Сергей" class="avatar">
+                </a>
+              </div>
+            </div>
+          </div>
+        
+          <div class="container content">
+            {{ content }}
+          </div>
         </div>
-      </div>
-
-      <div class="container content">
-        {{ content }}
-      </div>
-    </div>
 
     <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
