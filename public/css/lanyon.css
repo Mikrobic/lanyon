@@ -322,6 +322,15 @@ a.sidebar-nav-item:focus {
  * Posts and pages
  */
 
+
+.masthead-title {
+  position: relative;
+}
+.mobile-name {
+  font-weight: normal;
+  font-family: sans-serif;
+}
+
 .page,
 .post {
   margin-bottom: 4em;
