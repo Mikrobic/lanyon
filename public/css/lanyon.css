@@ -531,7 +531,8 @@ a.pagination-item:hover {
   color: #75b5aa;
 }
 
-/* Blue */
+
+/* Blue - использую текущую раскраску  */
 .theme-base-0d .sidebar,
 .theme-base-0d .sidebar-toggle:active,
 .theme-base-0d #sidebar-checkbox:checked ~ .sidebar-toggle {
@@ -542,6 +543,7 @@ a.pagination-item:hover {
 .theme-base-0d .related-posts li a:hover {
   color: #6a9fb5;
 }
+.theme-base-0d.sidebar-toggle::before,
 .theme-base-0d .sidebar-toggle:active:before,
 .theme-base-0d #sidebar-checkbox:focus ~ .sidebar-toggle::before,
 .theme-base-0d #sidebar-checkbox:checked ~ .sidebar-toggle::before {
