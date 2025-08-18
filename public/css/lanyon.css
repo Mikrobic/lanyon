@@ -126,32 +126,8 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(255,255,255,.6);
   background-color: #202020;
   transition: all .3s ease-in-out;
+  z-index: 100;
 }
-
-
-
-/* Добавьте новые стили сразу после этого блока */
-#sidebar-checkbox:checked ~ .sidebar {
-  transform: translateX(0); /* Исправленная версия */
-  visibility: visible;
-}
-
-.sidebar-toggle {
-  position: fixed; /* Изменено с absolute */
-  top: .8rem;
-  left: 1rem;
-  z-index: 101; /* Добавлено */
-  display: flex;
-  align-items: center;
-  padding: .25rem .75rem;
-  color: #505050;
-  background-color: #fff;
-  border-radius: .25rem;
-  cursor: pointer;
-  transition: transform .3s ease-in-out; /* Добавлено */
-}
-
-
 @media (min-width: 30em) {
   .sidebar {
     font-size: .75rem;
@@ -175,7 +151,7 @@ h1, h2, h3, h4, h5, h6 {
   border-bottom: 1px solid rgba(255,255,255,.1);
 }
 
-/* Стили для групп меню */
+/* Стили для групп меню (оставляем как было) */
 .sidebar-nav-group {
   position: relative;
 }
@@ -212,18 +188,11 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 500px;
 }
 
-/* Стили для подпунктов */
+/* Стили для подпунктов (оставляем как было) */
 .submenu-item {
   position: relative;
   padding-left: 15px !important;
 }
-
-/*.submenu-item::before {  --иконка подменю
-  content: "*";
-  position: absolute;
-  left: 0;
-  color: #268bd2;
-} */
 
 .sidebar-nav-item {
   display: block;
@@ -250,14 +219,12 @@ a.sidebar-nav-item:focus {
 
 /* Hide the sidebar checkbox */
 .sidebar-checkbox {
-  position: absolute;
-  opacity: 0;
-  user-select: none;
+  display: none;
 }
 
 /* Style the `label` that we use to target the `.sidebar-checkbox` */
 .sidebar-toggle {
-  position: absolute;
+  position: fixed;
   top: .8rem;
   left: 1rem;
   display: flex;
@@ -267,6 +234,8 @@ a.sidebar-nav-item:focus {
   background-color: #fff;
   border-radius: .25rem;
   cursor: pointer;
+  z-index: 101;
+  transition: transform .3s ease-in-out;
 }
 
 .sidebar-toggle::before {
@@ -307,22 +276,18 @@ a.sidebar-nav-item:focus {
 .sidebar,
 .sidebar-toggle {
   backface-visibility: hidden;
-}
-.wrap,
-.sidebar-toggle {
   transition: transform .3s ease-in-out;
 }
 
 #sidebar-checkbox:checked + .sidebar {
-  z-index: 10;
   visibility: visible;
+  transform: translateX(14rem);
 }
-#sidebar-checkbox:checked ~ .sidebar,
+
 #sidebar-checkbox:checked ~ .wrap,
 #sidebar-checkbox:checked ~ .sidebar-toggle {
   transform: translateX(14rem);
 }
-
 
 /*
  * Posts and pages
