@@ -2,15 +2,23 @@
 <html lang="en-us">
 <head>
   <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
+  <style>
+    /* Временные стили для диагностики */
+    .sidebar {
+      background-color: #202020 !important;
+    }
+    .sidebar-nav-item {
+      color: white !important;
+    }
+  </style>
 </head>
 <body class="theme-base-0d">
-  <!-- Чекбокс должен быть первым в body -->
   <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
   
-  <!-- Кнопка переключения -->
-  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  <label for="sidebar-checkbox" class="sidebar-toggle">
+    <span class="menu-icon"></span>
+  </label>
 
-  <!-- Сайдбар -->
   <div class="sidebar">
     <div class="sidebar-item">
       <p>{{ site.description }}</p>
@@ -21,16 +29,15 @@
       <a class="sidebar-nav-item" href="{{ site.baseurl }}/stack/">Стек</a>
       <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">Карьерный трек</a>
 
-      <div class="sidebar-nav-group{% if page.url contains '/project/' %} active{% endif %}">
-        <button class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
+      <div class="sidebar-nav-group">
+        <button class="sidebar-nav-item sidebar-nav-toggle">
           Проекты
           <svg class="toggle-icon" viewBox="0 0 24 24">
             <path d="M7 10l5 5 5-5z"/>
           </svg>
         </button>
         <div class="sidebar-submenu">
-          <a href="{{ site.baseurl }}/project/subpage/" 
-             class="sidebar-nav-item submenu-item{% if page.url == '/project/subpage/' %} active{% endif %}">
+          <a href="{{ site.baseurl }}/project/subpage/" class="sidebar-nav-item submenu-item">
             Дашборд по учёту ёмкости ресурсов компании
           </a>
         </div>
@@ -42,9 +49,8 @@
     </nav>
   </div>
 
-  <!-- Основной контент -->
   <div class="wrap">
-    <!-- Ваш контент здесь -->
+    <!-- Основной контент -->
   </div>
 
   <script src='{{ site.baseurl }}/public/js/sidebar.js'></script>
