@@ -130,12 +130,6 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
-/* Добавьте новые стили сразу после этого блока */
-#sidebar-checkbox:checked ~ .sidebar {
-  transform: translateX(0); /* Исправленная версия */
-  visibility: visible;
-}
-
 .sidebar-toggle {
   position: fixed; /* Изменено с absolute */
   top: .8rem;
