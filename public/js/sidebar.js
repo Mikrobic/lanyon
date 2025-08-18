@@ -6,17 +6,18 @@
             const group = button.closest('.sidebar-nav-group');
             if (!group) return;
             
-            const link = group.querySelector('a');
-            if (!link) return;
+            // Используем текст из кнопки вместо ссылки
+            const buttonText = button.textContent.trim();
             
-            // Более надежный способ получения идентификатора
-            const menuId = 'menu_' + (group.id || link.textContent.trim().toLowerCase().replace(/\s+/g, '_'));
+            // Создаем идентификатор меню
+            const menuId = 'menu_' + (group.id || buttonText.toLowerCase().replace(/\s+/g, '_'));
             
-            // Восстановление состояния
+            // Восстановление состояния из localStorage
             if (localStorage.getItem(menuId) === 'open') {
                 group.classList.add('active');
             }
             
+            // Обработчик клика для кнопки
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -30,9 +31,10 @@
         if (activeSubItem) {
             const parentGroup = activeSubItem.closest('.sidebar-nav-group');
             if (parentGroup) {
-                const link = parentGroup.querySelector('a');
-                if (link) {
-                    const menuId = 'menu_' + (parentGroup.id || link.textContent.trim().toLowerCase().replace(/\s+/g, '_'));
+                const button = parentGroup.querySelector('.sidebar-nav-toggle');
+                if (button) {
+                    const buttonText = button.textContent.trim();
+                    const menuId = 'menu_' + (parentGroup.id || buttonText.toLowerCase().replace(/\s+/g, '_'));
                     parentGroup.classList.add('active');
                     localStorage.setItem(menuId, 'open');
                 }
