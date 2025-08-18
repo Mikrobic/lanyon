@@ -279,7 +279,7 @@ a.sidebar-nav-item:focus {
   display: flex;
   align-items: center;
   padding: .25rem .75rem;
-  color: #6a9fb5;
+  color: #505050;
   background-color: #fff;
   border-radius: .25rem;
   cursor: pointer;
@@ -550,6 +550,9 @@ a.pagination-item:hover {
   background-color: #6a9fb5;
 }
 
+.theme-base-0d .sidebar-toggle::before {
+  background-color: #6a9fb5;
+}
 
 /* Magenta */
 .theme-base-0e .sidebar,
