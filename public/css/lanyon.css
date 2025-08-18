@@ -210,11 +210,6 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-50%) rotate(180deg);
 }
 
-/* Убрать стрелочку у обычного пункта */
-.sidebar-nav-item:not(.sidebar-nav-toggle) {
-  padding-right: 1rem; /* Стандартный отступ */
-}
-
 .sidebar-submenu {
   max-height: 0;
   overflow: hidden;
@@ -241,7 +236,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-nav-item {
   display: block;
-  padding: .5rem 1rem;
   border-top: 1px solid rgba(255,255,255,.1);
 }
 .sidebar-nav-item.active,
