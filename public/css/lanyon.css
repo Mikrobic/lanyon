@@ -180,7 +180,9 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-.sidebar-nav-toggle {
+/*Проекты можно править */
+
+.sidebar-nav-toggle { 
   background-color: transparent !important; /* Убираем белый фон */
   width: 100%;
   text-align: left;
@@ -206,6 +208,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-nav-group.active .toggle-icon {
   transform: translateY(-50%) rotate(180deg);
+}
+
+/* Убрать стрелочку у обычного пункта */
+.sidebar-nav-item:not(.sidebar-nav-toggle) {
+  padding-right: 1rem; /* Стандартный отступ */
 }
 
 .sidebar-submenu {
