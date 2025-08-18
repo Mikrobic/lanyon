@@ -550,9 +550,6 @@ a.pagination-item:hover {
   background-color: #6a9fb5;
 }
 
-.theme-base-0d .sidebar-toggle::before {
-  background-color: #6a9fb5;
-}
 
 /* Magenta */
 .theme-base-0e .sidebar,
