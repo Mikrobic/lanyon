@@ -51,27 +51,18 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -.025rem;
 }
 
-
 /*
  * Wrapper
- *
- * The wrapper is used to position site content when the sidebar is toggled. We
- * use an outter wrap to position the sidebar without interferring with the
- * regular page content.
  */
-
 .wrap {
   position: relative;
   width: 100%;
+  transition: transform .3s ease-in-out;
 }
-
 
 /*
  * Container
- *
- * Center the page content.
  */
-
 .container {
   max-width: 28rem;
 }
@@ -86,15 +77,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-
 /*
  * Masthead
- *
- * Super small header above the content for site name and short description.
  */
-
-
-/* Стили для контейнера */
 .masthead-content {
   display: flex;
   align-items: center;
@@ -102,17 +87,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .avatar {
-  width: 150px;         /* Размер аватарки */
-  height: 150px;        /* Квадратное изображение */
-  border-radius: 50%;   /* Делает круглым */
-  object-fit: cover;    /* Обрезает изображение по кругу */
-  display: block;       /* Чтобы центрировать */
-  margin: 0 auto;       /* Центрирование по горизонтали */
-  border: 3px solid #fff; /* Опционально: белая рамка */
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  border: 3px solid #fff;
 }
 
 .masthead {
-  padding-top:    1rem;
+  padding-top: 1rem;
   padding-bottom: 1rem;
   margin-bottom: 3rem;
   border-bottom: 1px solid #eee;
@@ -141,15 +126,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-
 /*
- * Sidebar
- *
- * The sidebar is the drawer, the item we are toggling with our handy hamburger
- * button in the corner of the page.
+ * Sidebar - ИСПРАВЛЕННАЯ ВЕРСИЯ
  */
-
-/* Style and "hide" the sidebar */
 .sidebar {
   position: fixed;
   top: 0;
@@ -163,6 +142,7 @@ h1, h2, h3, h4, h5, h6 {
   color: rgba(255,255,255,.6);
   background-color: #202020;
   transition: all .3s ease-in-out;
+  z-index: 100;
 }
 @media (min-width: 30em) {
   .sidebar {
@@ -170,7 +150,6 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Sidebar content */
 .sidebar a {
   font-weight: normal;
   color: #fff;
@@ -182,12 +161,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0;
 }
 
-/* Sidebar nav */
 .sidebar-nav {
   border-bottom: 1px solid rgba(255,255,255,.1);
 }
 
-/* Стили для групп меню */
 .sidebar-nav-group {
   position: relative;
 }
@@ -224,18 +201,10 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 500px;
 }
 
-/* Стили для подпунктов */
 .submenu-item {
   position: relative;
   padding-left: 15px !important;
 }
-
-/*.submenu-item::before {  --иконка подменю
-  content: "*";
-  position: absolute;
-  left: 0;
-  color: #268bd2;
-} */
 
 .sidebar-nav-item {
   display: block;
@@ -260,16 +229,12 @@ a.sidebar-nav-item:focus {
   }
 }
 
-/* Hide the sidebar checkbox */
 .sidebar-checkbox {
-  position: absolute;
-  opacity: 0;
-  user-select: none;
+  display: none;
 }
 
-/* Style the `label` that we use to target the `.sidebar-checkbox` */
 .sidebar-toggle {
-  position: absolute;
+  position: fixed;
   top: .8rem;
   left: 1rem;
   display: flex;
@@ -279,6 +244,8 @@ a.sidebar-nav-item:focus {
   background-color: #fff;
   border-radius: .25rem;
   cursor: pointer;
+  z-index: 101;
+  transition: transform .3s ease-in-out;
 }
 
 .sidebar-toggle::before {
@@ -302,34 +269,23 @@ a.sidebar-nav-item:focus {
   background: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%23fff' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' d='M2.5 11.5A.5.5 0 013 11h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 7h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5zm0-4A.5.5 0 013 3h10a.5.5 0 010 1H3a.5.5 0 01-.5-.5z' clip-rule='evenodd'/%3E%3C/svg%3E") no-repeat;
 }
 
-@media (min-width: 30.1em) {
-  .sidebar-toggle {
-    position: fixed;
-  }
-}
-
 @media print {
   .sidebar-toggle {
     display: none;
   }
 }
 
-/* Slide effect */
 .wrap,
 .sidebar,
 .sidebar-toggle {
   backface-visibility: hidden;
 }
-.wrap,
-.sidebar-toggle {
-  transition: transform .3s ease-in-out;
-}
 
 #sidebar-checkbox:checked + .sidebar {
-  z-index: 10;
   visibility: visible;
+  transform: translateX(14rem);
 }
-#sidebar-checkbox:checked ~ .sidebar,
+
 #sidebar-checkbox:checked ~ .wrap,
 #sidebar-checkbox:checked ~ .sidebar-toggle {
   transform: translateX(14rem);
