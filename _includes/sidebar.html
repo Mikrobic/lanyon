@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
 <head>
   <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
 </head>
-
 <body class="theme-base-0d">
-  <!-- Target for toggling the sidebar -->
+  <!-- Чекбокс должен быть первым в body -->
   <input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+  
+  <!-- Кнопка переключения -->
+  <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
-  <!-- Toggleable sidebar -->
-  <div class="sidebar" id="sidebar">
+  <!-- Сайдбар -->
+  <div class="sidebar">
     <div class="sidebar-item">
       <p>{{ site.description }}</p>
     </div>
 
     <nav class="sidebar-nav">
-      <!-- Page order -->
       <a class="sidebar-nav-item" href="{{ site.baseurl }}/for_me/">Обо мне</a>
       <a class="sidebar-nav-item" href="{{ site.baseurl }}/stack/">Стек</a>
       <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">Карьерный трек</a>
 
-      <!-- Nested project menu -->
       <div class="sidebar-nav-group{% if page.url contains '/project/' %} active{% endif %}">
-        <a href="javascript:void(0)" class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
+        <button class="sidebar-nav-item sidebar-nav-toggle{% if page.url contains '/project/' %} active{% endif %}">
           Проекты
           <svg class="toggle-icon" viewBox="0 0 24 24">
             <path d="M7 10l5 5 5-5z"/>
           </svg>
-        </a>
+        </button>
         <div class="sidebar-submenu">
           <a href="{{ site.baseurl }}/project/subpage/" 
              class="sidebar-nav-item submenu-item{% if page.url == '/project/subpage/' %} active{% endif %}">
@@ -43,7 +42,11 @@
     </nav>
   </div>
 
-  <script src='{{ site.baseurl }}/public/js/script.js'></script>
+  <!-- Основной контент -->
+  <div class="wrap">
+    <!-- Ваш контент здесь -->
+  </div>
 
+  <script src='{{ site.baseurl }}/public/js/sidebar.js'></script>
 </body>
 </html>
