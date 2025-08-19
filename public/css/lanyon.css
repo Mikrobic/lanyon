@@ -183,16 +183,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /*Проекты можно править */
 
-.sidebar-nav-toggle { 
+.sidebar-nav-group {
+  position: relative;
+}
+
+.sidebar-nav-toggle {
   position: relative;
   padding-right: 2rem;
   cursor: pointer;
-}
-
-
-.sidebar-nav-group.active > .sidebar-nav-toggle {
-  color: #fff !important;
-  background-color: rgba(255,255,255,.2) !important;
 }
 
 .toggle-icon {
@@ -209,7 +207,6 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar-nav-group.active .toggle-icon {
   transform: translateY(-50%) rotate(180deg);
 }
-
 
 .sidebar-submenu {
   max-height: 0;
