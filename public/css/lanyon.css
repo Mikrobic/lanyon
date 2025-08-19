@@ -139,9 +139,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-toggle {
   position: fixed; /* Изменено с absolute */
-  top: .8rem;
+  top: 1.8rem;
   left: 1rem;
-  z-index: 101; /* Добавлено */
+  z-index: 100; /* Добавлено */
   display: flex;
   align-items: center;
   padding: .25rem .75rem;
