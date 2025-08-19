@@ -184,7 +184,9 @@ h1, h2, h3, h4, h5, h6 {
 /*Проекты можно править */
 
 .sidebar-nav-toggle { 
-  background-color: transparent !important; /* Убираем белый фон */
+  position: relative;
+  background-color: transparent !important; 
+  /* Убираем белый фон */
   width: 100%;
   text-align: left;
   border: none;
@@ -210,7 +212,6 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar-nav-group.active .toggle-icon {
   transform: translateY(-50%) rotate(180deg);
 }
-
 
 
 .sidebar-submenu {
