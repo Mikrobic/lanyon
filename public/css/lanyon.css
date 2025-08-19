@@ -192,7 +192,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   text-align: left;
   border: none;
-  color: rgba(255,255,255,.8) !important; /* Цвет как у обычных ссылок */
+  color: rgba(255,255,255,.8) !important; /* Цвет текста */
 }
 
 .sidebar-nav-group.active > .sidebar-nav-toggle {
