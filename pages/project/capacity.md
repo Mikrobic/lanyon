@@ -1,9 +1,8 @@
 ---
 layout: page
 title: "Проекты"
-permalink: /project/subpage/
+permalink: /project/capacity/
 description: "Описание страницы Subpage"
-order: 4
 ---
 
 <body class="theme-base-08">
