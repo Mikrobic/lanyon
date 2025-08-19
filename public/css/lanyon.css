@@ -185,13 +185,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .sidebar-nav-toggle { 
   position: relative;
-  background-color: transparent !important; 
-  /* Убираем белый фон */
-  width: 100%;
-  text-align: left;
-  border: none;
-  color: rgba(255,255,255,.8) !important; /* Цвет как у обычных ссылок */
+  padding-right: 2rem;
+  cursor: pointer;
 }
+
 
 .sidebar-nav-group.active > .sidebar-nav-toggle {
   color: #fff !important;
