@@ -5,6 +5,10 @@ title: Обо мне
 ---
 
 
+<div class="gif-container">
+  <img src="{{ '/public/cat.gif' | absolute_url }}" alt="Котик" style="width: 100%; max-width: 1000px; display: block; margin: 0 auto 20px;">
+</div>
+
 <div class="message">
   Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
 </div>
