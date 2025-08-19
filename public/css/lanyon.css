@@ -207,15 +207,6 @@ h1, h2, h3, h4, h5, h6 {
   transition: transform 0.2s;
 }
 
-.sidebar-nav-group.active .toggle-icon {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-/* Убрать стрелочку у обычного пункта */
-.sidebar-nav-item:not(.sidebar-nav-toggle) {
-  padding-right: 1rem; /* Стандартный отступ */
-}
-
 .sidebar-submenu {
   max-height: 0;
   overflow: hidden;
