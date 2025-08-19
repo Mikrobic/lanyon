@@ -183,14 +183,24 @@ h1, h2, h3, h4, h5, h6 {
 
 /*Проекты можно править */
 
-.sidebar-nav-group {
+.sidebar-nav-toggle { 
   position: relative;
-}
-
-.sidebar-nav-toggle {
+  background-color: transparent !important; 
   position: relative;
   padding-right: 2rem;
   cursor: pointer;
+  /* Убираем белый фон */
+  width: 100%;
+  text-align: left;
+  border: none;
+  color: rgba(255,255,255,.8) !important; /* Цвет как у обычных ссылок */
+}
+
+
+
+.sidebar-nav-group.active > .sidebar-nav-toggle {
+  color: #fff !important;
+  background-color: rgba(255,255,255,.2) !important;
 }
 
 .toggle-icon {
@@ -207,6 +217,7 @@ h1, h2, h3, h4, h5, h6 {
 .sidebar-nav-group.active .toggle-icon {
   transform: translateY(-50%) rotate(180deg);
 }
+
 
 .sidebar-submenu {
   max-height: 0;
