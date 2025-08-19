@@ -207,6 +207,12 @@ h1, h2, h3, h4, h5, h6 {
   transition: transform 0.2s;
 }
 
+.sidebar-nav-group.active .toggle-icon {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+
+
 .sidebar-submenu {
   max-height: 0;
   overflow: hidden;
