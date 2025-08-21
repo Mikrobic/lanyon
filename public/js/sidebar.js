@@ -1,24 +1,6 @@
 (function(document) {
-    document.addEventListener('DOMContentLoaded', function() {
-        // Делегирование событий
-        document.addEventListener('click', function(e) {
-            const toggleButton = e.target.closest('.sidebar-nav-toggle');
-            if (!toggleButton) return;
-            
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const group = toggleButton.closest('.sidebar-nav-group');
-            if (!group) return;
-            
-            const menuId = toggleButton.dataset.menuId;
-            const isActive = group.classList.toggle('active');
-            
-            if (menuId) {
-                localStorage.setItem(menuId, isActive ? 'open' : 'closed');
-            }
-        });
-
+    // Функция для инициализации меню
+    function initSidebarMenu() {
         // Восстановление состояния из localStorage
         document.querySelectorAll('.sidebar-nav-toggle').forEach(button => {
             const group = button.closest('.sidebar-nav-group');
@@ -40,6 +22,32 @@
                     localStorage.setItem(toggleBtn.dataset.menuId, 'open');
                 }
                 parent = parent.parentElement?.closest('.sidebar-nav-group');
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Инициализируем меню
+        initSidebarMenu();
+        
+        // Делегирование событий
+        document.addEventListener('click', function(e) {
+            const toggleButton = e.target.closest('.sidebar-nav-toggle');
+            if (!toggleButton) return;
+            
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const group = toggleButton.closest('.sidebar-nav-group');
+            if (!group) return;
+            
+            const menuId = toggleButton.dataset.menuId;
+            const isActive = group.classList.toggle('active');
+            
+            console.log('Toggle clicked:', menuId, isActive); // Для отладки
+            
+            if (menuId) {
+                localStorage.setItem(menuId, isActive ? 'open' : 'closed');
             }
         });
     });
