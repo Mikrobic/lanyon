@@ -1,4 +1,3 @@
-// В assets/js/sidebar.js
 (function(document) {
     document.addEventListener('DOMContentLoaded', function() {
         // Делегирование событий
@@ -20,7 +19,7 @@
             }
         });
 
-        // Восстановление состояния
+        // Восстановление состояния из localStorage
         document.querySelectorAll('.sidebar-nav-toggle').forEach(button => {
             const group = button.closest('.sidebar-nav-group');
             const menuId = button.dataset.menuId;
@@ -30,10 +29,10 @@
             }
         });
 
-        // Автораскрытие для активной страницы
-        const activeItem = document.querySelector('.sidebar-nav-item.active');
-        if (activeItem) {
-            let parent = activeItem.closest('.sidebar-nav-group');
+        // Автораскрытие активного меню
+        const activeItems = document.querySelectorAll('.sidebar-nav-item.active');
+        activeItems.forEach(item => {
+            let parent = item.closest('.sidebar-nav-group');
             while (parent) {
                 parent.classList.add('active');
                 const toggleBtn = parent.querySelector('.sidebar-nav-toggle');
@@ -42,6 +41,6 @@
                 }
                 parent = parent.parentElement?.closest('.sidebar-nav-group');
             }
-        }
+        });
     });
 })(document);
