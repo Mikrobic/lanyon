@@ -53,9 +53,17 @@
 
     // Функция для определения уровня группы
     function getNavGroupLevel(group) {
-        if (group.classList.contains('sidebar-nav-group')) return 1;
         if (group.classList.contains('sidebar-nav-group_2')) return 2;
         if (group.classList.contains('sidebar-nav-group_3')) return 3;
+        if (group.classList.contains('sidebar-nav-group')) return 1; // fallback
+        return 1; // По умолчанию
+    }
+
+    // Функция для определения уровня toggle кнопки
+    function getToggleButtonLevel(button) {
+        if (button.classList.contains('sidebar-nav-toggle_2')) return 2;
+        if (button.classList.contains('sidebar-nav-toggle_3')) return 3;
+        if (button.classList.contains('sidebar-nav-toggle')) return 1;
         return 1; // По умолчанию
     }
 
@@ -77,7 +85,10 @@
             const menuId = toggleButton.dataset.menuId;
             const isActive = group.classList.toggle('active');
             
-            console.log('Toggle clicked:', menuId, isActive, 'Level:', getNavGroupLevel(group), 'Button class:', toggleButton.className);
+            console.log('Toggle clicked:', menuId, isActive, 
+                       'Group Level:', getNavGroupLevel(group),
+                       'Button Level:', getToggleButtonLevel(toggleButton),
+                       'Button class:', toggleButton.className);
             
             if (menuId) {
                 localStorage.setItem(menuId, isActive ? 'open' : 'closed');
