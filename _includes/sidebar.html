@@ -25,7 +25,7 @@
       <div class="sidebar-nav-group">
         <button class="sidebar-nav-item sidebar-nav-toggle">
           <span class="toggle-content">
-            Проекты_1
+            Проекты
             <svg class="toggle-icon" viewBox="0 0 24 24">
               <path d="M7 10l5 5 5-5z"/>
             </svg>
@@ -33,11 +33,31 @@
         </button>
         
         <div class="sidebar-submenu">
-          <!-- Вложенная группа -->
+          <!-- Группа Проекты_1 -->
           <div class="sidebar-nav-group">
             <button class="sidebar-nav-item sidebar-nav-toggle">
               <span class="toggle-content">
-                Проекты
+                Проекты_1
+                <svg class="toggle-icon" viewBox="0 0 24 24">
+                  <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </span>
+            </button>
+            <div class="sidebar-submenu">
+              <a href="{{ site.baseurl }}/project1/item1/" class="sidebar-nav-item submenu-item">
+                Элемент Проектов_1
+              </a>
+              <a href="{{ site.baseurl }}/project1/item2/" class="sidebar-nav-item submenu-item">
+                Другой элемент Проектов_1
+              </a>
+            </div>
+          </div>
+          
+          <!-- Группа Проекты_2 -->
+          <div class="sidebar-nav-group">
+            <button class="sidebar-nav-item sidebar-nav-toggle">
+              <span class="toggle-content">
+                Проекты_2
                 <svg class="toggle-icon" viewBox="0 0 24 24">
                   <path d="M7 10l5 5 5-5z"/>
                 </svg>
@@ -58,7 +78,6 @@
               </a>
             </div>
           </div>
-          <!-- Конец вложенной группы -->
         </div>
       </div>
 
