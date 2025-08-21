@@ -22,64 +22,59 @@
       <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">Карьерный трек</a>
        
 
-      <div class="sidebar-nav-group">
-        <button class="sidebar-nav-item sidebar-nav-toggle" data-menu-id="projects_main">
-          <span class="toggle-content">
-            Проекты
-            <svg class="toggle-icon" viewBox="0 0 24 24">
-              <path d="M7 10l5 5 5-5z"/>
-            </svg>
-          </span>
-        </button>
-        
-        <div class="sidebar-submenu">
-          <!-- Группа Проекты_1 -->
-          <div class="sidebar-nav-group">
-            <button class="sidebar-nav-item sidebar-nav-toggle" data-menu-id="projects_1">
-              <span class="toggle-content">
-                Проекты_1
-                <svg class="toggle-icon" viewBox="0 0 24 24">
-                  <path d="M7 10l5 5 5-5z"/>
-                </svg>
-              </span>
-            </button>
-            <div class="sidebar-submenu">
-              <a href="{{ site.baseurl }}/project1/item1/" class="sidebar-nav-item submenu-item">
-                Элемент Проектов_1
-              </a>
-              <a href="{{ site.baseurl }}/project1/item2/" class="sidebar-nav-item submenu-item">
-                Другой элемент Проектов_1
-              </a>
-            </div>
-          </div>
-          
-          <!-- Группа Проекты_2 -->
-          <div class="sidebar-nav-group">
-            <button class="sidebar-nav-item sidebar-nav-toggle" data-menu-id="projects_2">
-              <span class="toggle-content">
-                Проекты_2
-                <svg class="toggle-icon" viewBox="0 0 24 24">
-                  <path d="M7 10l5 5 5-5z"/>
-                </svg>
-              </span>
-            </button>
-            <div class="sidebar-submenu">
-              <a href="{{ site.baseurl }}/project/capacity/" class="sidebar-nav-item submenu-item">
-                Дашборд по учёту ёмкости ресурсов компании
-              </a>
-              <a href="{{ site.baseurl }}/project/clients/" class="sidebar-nav-item submenu-item">
-                Клиентская аналитика
-              </a>
-              <a href="{{ site.baseurl }}/project/basket/" class="sidebar-nav-item submenu-item">
-                Аналитика корзины
-              </a>
-              <a href="{{ site.baseurl }}/project/linter/" class="sidebar-nav-item submenu-item">
-                SQL - линтер
-              </a>
-            </div>
-          </div>
-        </div>
+<!-- Первый уровень -->
+<div class="sidebar-nav-group sidebar-nav-group_1">
+  <button class="sidebar-nav-item sidebar-nav-toggle" data-menu-id="projects_main">
+    <span class="toggle-content">
+      Проекты
+      <svg class="toggle-icon" viewBox="0 0 24 24">
+        <path d="M7 10l5 5 5-5z"/>
+      </svg>
+    </span>
+  </button>
+  
+  <div class="sidebar-submenu">
+    <!-- Второй уровень - Проекты_1 -->
+    <div class="sidebar-nav-group sidebar-nav-group_2">
+      <button class="sidebar-nav-item sidebar-nav-toggle" data-menu-id="projects_1">
+        <span class="toggle-content">
+          Проекты_1
+          <svg class="toggle-icon" viewBox="0 0 24 24">
+            <path d="M7 10l5 5 5-5z"/>
+          </svg>
+        </span>
+      </button>
+      <div class="sidebar-submenu">
+        <a href="{{ site.baseurl }}/project1/item1/" class="sidebar-nav-item submenu-item">
+          Элемент Проектов_1
+        </a>
+        <a href="{{ site.baseurl }}/project1/item2/" class="sidebar-nav-item submenu-item">
+          Другой элемент Проектов_1
+        </a>
       </div>
+    </div>
+    
+    <!-- Второй уровень - Проекты_2 -->
+    <div class="sidebar-nav-group sidebar-nav-group_2">
+      <button class="sidebar-nav-item sidebar-nav-toggle" data-menu-id="projects_2">
+        <span class="toggle-content">
+          Проекты_2
+          <svg class="toggle-icon" viewBox="0 0 24 24">
+            <path d="M7 10l5 5 5-5z"/>
+          </svg>
+        </span>
+      </button>
+      <div class="sidebar-submenu">
+        <a href="{{ site.baseurl }}/project/capacity/" class="sidebar-nav-item submenu-item">
+          Дашборд по учёту ёмкости
+        </a>
+        <a href="{{ site.baseurl }}/project/clients/" class="sidebar-nav-item submenu-item">
+          Клиентская аналитика
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
       
       <div class="sidebar-item">

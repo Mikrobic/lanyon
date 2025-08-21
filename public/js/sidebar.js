@@ -18,8 +18,8 @@
             const isActive = group.classList.toggle('active');
             localStorage.setItem(menuId, isActive ? 'open' : 'closed');
             
-            // Закрываем другие меню того же уровня (опционально)
-            closeSiblingMenus(group, menuId);
+            // Закрываем другие меню ТОГО ЖЕ УРОВНЯ
+            closeSiblingMenusSameLevel(group, menuId);
         });
 
         // Восстановление состояния всех меню
@@ -39,25 +39,42 @@
             });
         }
 
-        // Функция для закрытия меню того же уровня (если нужно)
-        function closeSiblingMenus(currentGroup, currentMenuId) {
+        // Функция для закрытия меню ТОГО ЖЕ УРОВНЯ
+        function closeSiblingMenusSameLevel(currentGroup, currentMenuId) {
             const parent = currentGroup.parentElement;
             if (!parent) return;
             
+            // Определяем уровень текущей группы
+            const currentLevel = getNavGroupLevel(currentGroup);
+            
+            // Ищем только группы ТОГО ЖЕ УРОВНЯ в том же родителе
             const siblingGroups = parent.querySelectorAll('.sidebar-nav-group');
             siblingGroups.forEach(siblingGroup => {
                 if (siblingGroup !== currentGroup) {
-                    const siblingButton = siblingGroup.querySelector('.sidebar-nav-toggle');
-                    if (siblingButton) {
-                        const siblingMenuId = siblingButton.dataset.menuId || 
-                                            'menu_' + siblingButton.textContent.trim().toLowerCase().replace(/\s+/g, '_');
-                        if (siblingMenuId !== currentMenuId) {
-                            siblingGroup.classList.remove('active');
-                            localStorage.setItem(siblingMenuId, 'closed');
+                    const siblingLevel = getNavGroupLevel(siblingGroup);
+                    
+                    // Закрываем только группы ТОГО ЖЕ УРОВНЯ
+                    if (siblingLevel === currentLevel) {
+                        const siblingButton = siblingGroup.querySelector('.sidebar-nav-toggle');
+                        if (siblingButton) {
+                            const siblingMenuId = siblingButton.dataset.menuId || 
+                                                'menu_' + siblingButton.textContent.trim().toLowerCase().replace(/\s+/g, '_');
+                            if (siblingMenuId !== currentMenuId) {
+                                siblingGroup.classList.remove('active');
+                                localStorage.setItem(siblingMenuId, 'closed');
+                            }
                         }
                     }
                 }
             });
+        }
+
+        // Функция для определения уровня группы
+        function getNavGroupLevel(group) {
+            if (group.classList.contains('sidebar-nav-group_1')) return 1;
+            if (group.classList.contains('sidebar-nav-group_2')) return 2;
+            if (group.classList.contains('sidebar-nav-group_3')) return 3;
+            return 1; // По умолчанию
         }
 
         // Автоматическое раскрытие для активной страницы
