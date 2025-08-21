@@ -31,31 +31,36 @@
             </svg>
           </span>
         </button>
-      <div class="sidebar-nav-group">
-        <button class="sidebar-nav-item sidebar-nav-toggle">
-          <span class="toggle-content">
-            Проекты
-            <svg class="toggle-icon" viewBox="0 0 24 24">
-              <path d="M7 10l5 5 5-5z"/>
-            </svg>
-          </span>
-        </button>
+        
         <div class="sidebar-submenu">
-          <a href="{{ site.baseurl }}/project/capacity/" class="sidebar-nav-item submenu-item">
-            Дашборд по учёту ёмкости ресурсов компании
-          </a>
-          <a href="{{ site.baseurl }}/project/clients/" class="sidebar-nav-item submenu-item">
-            Клиентская аналитика
-          </a>
-          <a href="{{ site.baseurl }}/project/basket/" class="sidebar-nav-item submenu-item">
-            Аналитика корзины
-          </a>
-          <a href="{{ site.baseurl }}/project/linter/" class="sidebar-nav-item submenu-item">
-            SQL - линтер
-          </a>
+          <!-- Вложенная группа -->
+          <div class="sidebar-nav-group">
+            <button class="sidebar-nav-item sidebar-nav-toggle">
+              <span class="toggle-content">
+                Проекты
+                <svg class="toggle-icon" viewBox="0 0 24 24">
+                  <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </span>
+            </button>
+            <div class="sidebar-submenu">
+              <a href="{{ site.baseurl }}/project/capacity/" class="sidebar-nav-item submenu-item">
+                Дашборд по учёту ёмкости ресурсов компании
+              </a>
+              <a href="{{ site.baseurl }}/project/clients/" class="sidebar-nav-item submenu-item">
+                Клиентская аналитика
+              </a>
+              <a href="{{ site.baseurl }}/project/basket/" class="sidebar-nav-item submenu-item">
+                Аналитика корзины
+              </a>
+              <a href="{{ site.baseurl }}/project/linter/" class="sidebar-nav-item submenu-item">
+                SQL - линтер
+              </a>
+            </div>
+          </div>
+          <!-- Конец вложенной группы -->
         </div>
       </div>
-    </div>
 
       
       <div class="sidebar-item">
