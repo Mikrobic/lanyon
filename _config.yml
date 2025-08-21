@@ -39,6 +39,16 @@ defaults:
       grand_parent: "Проекты"
       permalink: /:baseurl/project/project_2/:title/
 
+  - scope:
+      path: "pages/project/projects_3"
+      type: "pages"
+    values:
+      layout: "page"
+      parent: "Проекты_3"
+      grand_parent: "Проекты"
+      permalink: /:baseurl/project/project_3/:title/
+
+
 
 
 # Gems
