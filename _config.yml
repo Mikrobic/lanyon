@@ -37,7 +37,7 @@ defaults:
       layout: "page"
       parent: "Проекты_2"
       grand_parent: "Проекты"
-      permalink: /:baseurl/project/projects_2/:title/
+      permalink: /:baseurl/project/project_2/:title/
 
 
 
