@@ -235,8 +235,21 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 5px;
 }
 
+.sidebar-nav-toggle_2 { 
+  position: relative;
+  background-color: transparent !important; 
+  padding-right: 2rem;
+  cursor: pointer;
+  /* Убираем белый фон */
+  width: 100%;
+  text-align: left;
+  border: none;
+  color: rgba(255,255,255,.8) !important; /* Цвет текста */
+}
+
+
 /* Активное состояние для УРОВНЯ 2 */
-.sidebar-nav-group_2.active > .sidebar-nav-toggle {
+.sidebar-nav-group_2.active > .sidebar-nav-toggle_2 {
   color: #fff !important;
   background-color: rgba(255,255,255,.15) !important;
 }

@@ -1,8 +1,8 @@
 (function(document) {
     // Функция для инициализации меню
     function initSidebarMenu() {
-        // Восстановление состояния из localStorage
-        document.querySelectorAll('.sidebar-nav-toggle').forEach(button => {
+        // Восстановление состояния из localStorage для всех уровней toggle
+        document.querySelectorAll('.sidebar-nav-toggle, .sidebar-nav-toggle_2').forEach(button => {
             const group = button.closest('.sidebar-nav-group');
             const menuId = button.dataset.menuId;
             
@@ -17,7 +17,8 @@
             let parent = item.closest('.sidebar-nav-group');
             while (parent) {
                 parent.classList.add('active');
-                const toggleBtn = parent.querySelector('.sidebar-nav-toggle');
+                // Ищем toggle кнопки всех уровней
+                const toggleBtn = parent.querySelector('.sidebar-nav-toggle, .sidebar-nav-toggle_2');
                 if (toggleBtn && toggleBtn.dataset.menuId) {
                     localStorage.setItem(toggleBtn.dataset.menuId, 'open');
                 }
@@ -39,7 +40,8 @@
             if (siblingGroup !== currentGroup) {
                 const siblingLevel = getNavGroupLevel(siblingGroup);
                 if (siblingLevel === currentLevel) {
-                    const siblingButton = siblingGroup.querySelector('.sidebar-nav-toggle');
+                    // Ищем toggle кнопки всех уровней
+                    const siblingButton = siblingGroup.querySelector('.sidebar-nav-toggle, .sidebar-nav-toggle_2');
                     if (siblingButton && siblingButton.dataset.menuId) {
                         siblingGroup.classList.remove('active');
                         localStorage.setItem(siblingButton.dataset.menuId, 'closed');
@@ -61,9 +63,9 @@
         // Инициализируем меню
         initSidebarMenu();
         
-        // Делегирование событий
+        // Делегирование событий для всех уровней toggle
         document.addEventListener('click', function(e) {
-            const toggleButton = e.target.closest('.sidebar-nav-toggle');
+            const toggleButton = e.target.closest('.sidebar-nav-toggle, .sidebar-nav-toggle_2');
             if (!toggleButton) return;
             
             e.preventDefault();
@@ -75,7 +77,7 @@
             const menuId = toggleButton.dataset.menuId;
             const isActive = group.classList.toggle('active');
             
-            console.log('Toggle clicked:', menuId, isActive, 'Level:', getNavGroupLevel(group));
+            console.log('Toggle clicked:', menuId, isActive, 'Level:', getNavGroupLevel(group), 'Button class:', toggleButton.className);
             
             if (menuId) {
                 localStorage.setItem(menuId, isActive ? 'open' : 'closed');
