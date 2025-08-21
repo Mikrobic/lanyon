@@ -2,7 +2,7 @@
     // Функция для инициализации меню
     function initSidebarMenu() {
         // Восстановление состояния из localStorage для всех уровней toggle
-        document.querySelectorAll('.sidebar-nav-toggle, .sidebar-nav-toggle_2').forEach(button => {
+        document.querySelectorAll('.sidebar-nav-toggle, .sidebar-nav-toggle_2, .sidebar-nav-toggle_3').forEach(button => {
             const group = button.closest('.sidebar-nav-group');
             const menuId = button.dataset.menuId;
             
@@ -18,7 +18,7 @@
             while (parent) {
                 parent.classList.add('active');
                 // Ищем toggle кнопки всех уровней
-                const toggleBtn = parent.querySelector('.sidebar-nav-toggle, .sidebar-nav-toggle_2');
+                const toggleBtn = parent.querySelector('.sidebar-nav-toggle, .sidebar-nav-toggle_2, .sidebar-nav-toggle_3');
                 if (toggleBtn && toggleBtn.dataset.menuId) {
                     localStorage.setItem(toggleBtn.dataset.menuId, 'open');
                 }
@@ -41,7 +41,7 @@
                 const siblingLevel = getNavGroupLevel(siblingGroup);
                 if (siblingLevel === currentLevel) {
                     // Ищем toggle кнопки всех уровней
-                    const siblingButton = siblingGroup.querySelector('.sidebar-nav-toggle, .sidebar-nav-toggle_2');
+                    const siblingButton = siblingGroup.querySelector('.sidebar-nav-toggle, .sidebar-nav-toggle_2, .sidebar-nav-toggle_3');
                     if (siblingButton && siblingButton.dataset.menuId) {
                         siblingGroup.classList.remove('active');
                         localStorage.setItem(siblingButton.dataset.menuId, 'closed');
@@ -73,7 +73,7 @@
         
         // Делегирование событий для всех уровней toggle
         document.addEventListener('click', function(e) {
-            const toggleButton = e.target.closest('.sidebar-nav-toggle, .sidebar-nav-toggle_2');
+            const toggleButton = e.target.closest('.sidebar-nav-toggle, .sidebar-nav-toggle_2, .sidebar-nav-toggle_3');
             if (!toggleButton) return;
             
             e.preventDefault();
