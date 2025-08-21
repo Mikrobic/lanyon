@@ -235,6 +235,13 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 5px;
 }
 
+/* Активное состояние для УРОВНЯ 2 */
+.sidebar-nav-group_2.active > .sidebar-nav-toggle {
+  color: #fff !important;
+  background-color: rgba(255,255,255,.15) !important;
+}
+
+
 .sidebar-submenu_1 {
   padding-left: 15px;
 }
