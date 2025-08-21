@@ -177,64 +177,29 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Стили для групп меню */
-/* Базовые стили для всех групп меню */
 .sidebar-nav-group {
   position: relative;
 }
 
-/* Стили для разных уровней вложенности */
-.sidebar-nav-group_1 {
-  /* Первый уровень (основной) */
-  margin-bottom: 5px;
-}
+/*Проекты можно править */
 
-.sidebar-nav-group_2 {
-  /* Второй уровень */
-  margin-left: 15px;
-  border-left: 2px solid rgba(255, 255, 255, 0.1);
-  padding-left: 10px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.sidebar-nav-group_3 {
-  /* Третий уровень */
-  margin-left: 25px;
-  border-left: 2px solid rgba(255, 255, 255, 0.05);
-  padding-left: 8px;
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-
-/* Стили для кнопок переключения */
 .sidebar-nav-toggle { 
   position: relative;
   background-color: transparent !important; 
   padding-right: 2rem;
   cursor: pointer;
+  /* Убираем белый фон */
   width: 100%;
   text-align: left;
   border: none;
-  color: rgba(255,255,255,.8) !important;
+  color: rgba(255,255,255,.8) !important; /* Цвет текста */
 }
 
-/* Активное состояние для разных уровней */
-.sidebar-nav-group_1.active > .sidebar-nav-toggle {
+.sidebar-nav-group.active > .sidebar-nav-toggle {
   color: #fff !important;
   background-color: rgba(255,255,255,.2) !important;
 }
 
-.sidebar-nav-group_2.active > .sidebar-nav-toggle {
-  color: #fff !important;
-  background-color: rgba(255,255,255,.15) !important;
-}
-
-.sidebar-nav-group_3.active > .sidebar-nav-toggle {
-  color: #fff !important;
-  background-color: rgba(255,255,255,.1) !important;
-}
-
-/* Иконки переключения */
 .toggle-icon {
   position: absolute;
   right: 1rem;
@@ -250,49 +215,16 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-50%) rotate(180deg);
 }
 
-/* Подменю */
+
 .sidebar-submenu {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-}
-
-.sidebar-nav-group.active .sidebar-submenu {
-  max-height: 1000px;
-}
-
-/* Стили для подпунктов */
-.submenu-item {
-  position: relative;
-  padding-left: 20px !important;
-  display: block;
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
-}
-
-.submenu-item:hover {
-  opacity: 1;
-  background-color: rgba(255, 255, 255, 0.05) !important;
-}
-
-/* Отступы для подменю разных уровней */
-.sidebar-nav-group_1 .sidebar-submenu {
   padding-left: 15px;
 }
 
-.sidebar-nav-group_2 .sidebar-submenu {
-  padding-left: 10px;
-}
-
-.sidebar-nav-group_3 .sidebar-submenu {
-  padding-left: 5px;
-}
-
-/* Индикатор активной страницы */
-.sidebar-nav-item.active {
-  color: #fff !important;
-  background-color: rgba(38, 139, 210, 0.3) !important;
-  font-weight: 500;
+.sidebar-nav-group.active .sidebar-submenu {
+  max-height: 500px;
 }
 
 /* Стили для подпунктов */
