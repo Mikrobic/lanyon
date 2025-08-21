@@ -1,43 +1,46 @@
+// В assets/js/sidebar.js
 (function(document) {
     document.addEventListener('DOMContentLoaded', function() {
-        const toggleButtons = document.querySelectorAll('.sidebar-nav-toggle');
-        
-        toggleButtons.forEach(button => {
-            const group = button.closest('.sidebar-nav-group');
+        // Делегирование событий
+        document.addEventListener('click', function(e) {
+            const toggleButton = e.target.closest('.sidebar-nav-toggle');
+            if (!toggleButton) return;
+            
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const group = toggleButton.closest('.sidebar-nav-group');
             if (!group) return;
             
-            // Используем текст из кнопки вместо ссылки
-            const buttonText = button.textContent.trim();
+            const menuId = toggleButton.dataset.menuId;
+            const isActive = group.classList.toggle('active');
             
-            // Создаем идентификатор меню
-            const menuId = 'menu_' + (group.id || buttonText.toLowerCase().replace(/\s+/g, '_'));
-            
-            // Восстановление состояния из localStorage
-            if (localStorage.getItem(menuId) === 'open') {
-                group.classList.add('active');
-            }
-            
-            // Обработчик клика для кнопки
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                const isActive = group.classList.toggle('active');
+            if (menuId) {
                 localStorage.setItem(menuId, isActive ? 'open' : 'closed');
-            });
+            }
         });
 
-        // Автоматическое раскрытие для активной страницы
-        const activeSubItem = document.querySelector('.sidebar-submenu .active');
-        if (activeSubItem) {
-            const parentGroup = activeSubItem.closest('.sidebar-nav-group');
-            if (parentGroup) {
-                const button = parentGroup.querySelector('.sidebar-nav-toggle');
-                if (button) {
-                    const buttonText = button.textContent.trim();
-                    const menuId = 'menu_' + (parentGroup.id || buttonText.toLowerCase().replace(/\s+/g, '_'));
-                    parentGroup.classList.add('active');
-                    localStorage.setItem(menuId, 'open');
+        // Восстановление состояния
+        document.querySelectorAll('.sidebar-nav-toggle').forEach(button => {
+            const group = button.closest('.sidebar-nav-group');
+            const menuId = button.dataset.menuId;
+            
+            if (menuId && localStorage.getItem(menuId) === 'open') {
+                group.classList.add('active');
+            }
+        });
+
+        // Автораскрытие для активной страницы
+        const activeItem = document.querySelector('.sidebar-nav-item.active');
+        if (activeItem) {
+            let parent = activeItem.closest('.sidebar-nav-group');
+            while (parent) {
+                parent.classList.add('active');
+                const toggleBtn = parent.querySelector('.sidebar-nav-toggle');
+                if (toggleBtn && toggleBtn.dataset.menuId) {
+                    localStorage.setItem(toggleBtn.dataset.menuId, 'open');
                 }
+                parent = parent.parentElement?.closest('.sidebar-nav-group');
             }
         }
     });
