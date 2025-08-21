@@ -1,6 +1,6 @@
 ---
 layout: page
 title: "Аналитика корзины"
-permalink: /project/project_2/basket/
+permalink: /project/projects_2/basket/
 description: "Описание страницы Subpage"
 ---
