@@ -215,6 +215,21 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-50%) rotate(180deg);
 }
 
+.toggle-icon_2 {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  transition: transform 0.2s;
+}
+
+.sidebar-nav-group_2.active .toggle-icon_2 {
+  transform: translateY(-50%) rotate(180deg);
+}
+
 
 .sidebar-submenu {
   max-height: 0;
