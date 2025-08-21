@@ -274,6 +274,10 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 15px;
 }
 
+.sidebar-nav-group_2.active .sidebar-submenu_1 {
+  max-height: 500px;
+}
+
 .sidebar-submenu_2 {
   padding-left: 10px;
 }
