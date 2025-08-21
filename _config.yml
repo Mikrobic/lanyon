@@ -30,6 +30,15 @@ defaults:
       parent: "project"
       permalink: /:baseurl/project/:title/
 
+  - scope:
+      path: "pages/project/projects_2"
+      type: "pages"
+    values:
+      layout: "page"
+      parent: "Проекты_2"
+      grand_parent: "Проекты"
+      permalink: /:baseurl/project/projects_2/:title/
+
 
 
 # Gems
