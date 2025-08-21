@@ -183,6 +183,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /*Проекты можно править */
 
+/*Главный подпункт Проекты */
+
+.sidebar-submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding-left: 15px;
+}
+
+.sidebar-nav-group.active .sidebar-submenu {
+  max-height: 500px;
+}
+
 .sidebar-nav-toggle { 
   position: relative;
   background-color: transparent !important; 
@@ -215,33 +228,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-50%) rotate(180deg);
 }
 
-.toggle-icon_2 {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1em;
-  height: 1em;
-  fill: currentColor;
-  transition: transform 0.2s;
-}
-
-.sidebar-nav-group_2.active .toggle-icon_2 {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-
-.sidebar-submenu {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  padding-left: 15px;
-}
-
-.sidebar-nav-group.active .sidebar-submenu {
-  max-height: 500px;
-}
-
+/*Подпункт BI - отчеты */
 .sidebar-nav-group_2 {
   margin-left: 15px;
   border-left: 2px solid rgba(255, 255, 255, 0.1);
@@ -263,7 +250,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/* Активное состояние для УРОВНЯ 2 */
 .sidebar-nav-group_2.active > .sidebar-nav-toggle_2 {
   color: #fff !important;
   background-color: rgba(255,255,255,.15) !important;
@@ -281,13 +267,77 @@ h1, h2, h3, h4, h5, h6 {
   max-height: 500px;
 }
 
-.sidebar-submenu_2 {
+.toggle-icon_2 {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  transition: transform 0.2s;
+}
+
+.sidebar-nav-group_2.active .toggle-icon_2 {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+
+/*Подпункт Бизнес проекты */
+.sidebar-nav-group_3 {
+  margin-left: 15px;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.sidebar-nav-toggle_3 { 
+  position: relative;
+  background-color: transparent !important; 
+  padding-right: 2rem;
+  cursor: pointer;
+  /* Убираем белый фон */
+  width: 100%;
+  text-align: left;
+  border: none;
+  color: rgba(255,255,255,.8) !important; /* Цвет текста */
+}
+
+
+.sidebar-nav-group_3.active > .sidebar-nav-toggle_3 {
+  color: #fff !important;
+  background-color: rgba(255,255,255,.15) !important;
+}
+
+
+.sidebar-submenu_3 {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
   padding-left: 15px;
 }
-/* Стили для подпунктов */
+
+.sidebar-nav-group_3.active .sidebar-submenu_3 {
+  max-height: 500px;
+}
+
+.toggle-icon_3 {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  transition: transform 0.2s;
+}
+
+.sidebar-nav-group_3.active .toggle-icon_3 {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+
 .submenu-item {
   position: relative;
   padding-left: 15px !important;
