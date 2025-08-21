@@ -271,6 +271,9 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .sidebar-submenu_1 {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
   padding-left: 15px;
 }
 
@@ -279,9 +282,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar-submenu_2 {
-  padding-left: 10px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding-left: 15px;
 }
-
 /* Стили для подпунктов */
 .submenu-item {
   position: relative;
