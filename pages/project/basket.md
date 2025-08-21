@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Клиенты по когортам"
-permalink: /project/clients/
+title: "Аналитика корзины"
+permalink: /project/basket/
 description: "Описание страницы Subpage"
 ---

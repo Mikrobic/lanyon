@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Клиенты по когортам"
-permalink: /project/clients/
+title: "SQL линтер"
+permalink: /project/linter/
 description: "Описание страницы Subpage"
 ---

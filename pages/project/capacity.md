@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Проекты"
+title: "Ёмкость ресурсов на кластерах виртуальной инфраструктуры"
 permalink: /project/capacity/
 description: "Описание страницы Subpage"
 ---
