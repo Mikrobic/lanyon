@@ -20,7 +20,7 @@ permalink: /
 
 Мои контакты 
 
-Телеграмм: <a href="https://web.telegram.org/">@SergeyTimakin</a> 
+Телеграмм: <a href="https://web.telegram.org/k/#@SergeyTimakin">@SergeyTimakin</a> 
 
 Почта: timakin1983@mail.ru
  
