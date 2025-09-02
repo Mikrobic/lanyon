@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Обо мне
+title: Welcome page
 permalink: /
 ---
 
@@ -12,7 +12,11 @@ permalink: /
   Этот пузатый прыгающий котик приветствует тебя на моем личном сайте!
 </div>
 
-Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. *Aenean eu leo quam.* Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
+Привет! Меня зовут Сергей Тимакин и это мой <a href="личный творческий"> и <a href="рабочий сайт">. Я не преследую целей получения выгоды от него, а просто хочу поглубже изучить создания сайтов и других возможных приложений. 
+На сайте вы сможете увидеть мой рабочий и учебный опыт. 
+
+Буду очень рад, если ты сможешь поделиться обратной связью. Мои контакты: телеграмм @SergeyTimakin Почта: timakin1983@mail.ru
+ <a href="#">dis parturient montes</a>, nascetur ridiculus mus. *Aenean eu leo quam.* Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
 
 > Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
 
