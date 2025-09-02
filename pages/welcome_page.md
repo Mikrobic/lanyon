@@ -16,9 +16,9 @@ permalink: /
 
 Буду очень рад, если ты сможешь поделиться обратной связью. 
 
-Мои контакты: 
+Мои контакты 
 
-Телеграмм <a href="https://web.telegram.org/">@SergeyTimakin</a> 
+Телеграмм: <a href="https://web.telegram.org/">@SergeyTimakin</a> 
 
 Почта: timakin1983@mail.ru
  
