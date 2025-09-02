@@ -11,10 +11,13 @@ permalink: /
   Этот пузатый прыгающий котик приветствует тебя на моем личном сайте!
 </div>
 
-Привет! Меня зовут **Сергей Тимакин** и это мой <a href="#">личный творческий</a> и <a href="#">рабочий сайт</a>. Я не преследую целей получения выгоды от него, а просто хочу поглубже изучить создания сайтов и других возможных приложений. 
+Привет! Меня зовут **Сергей Тимакин** и это мой *личный творческий* и *рабочий сайт*. Я не преследую целей получения выгоды от него, а просто хочу поглубже изучить создания сайтов и других возможных приложений. 
 На сайте вы сможете увидеть мой рабочий и учебный опыт. 
 
-Буду очень рад, если ты сможешь поделиться обратной связью. Мои контакты: телеграмм @SergeyTimakin Почта: timakin1983@mail.ru
+Буду очень рад, если ты сможешь поделиться обратной связью. 
+Мои контакты: 
+Телеграмм <a href="https://web.telegram.org/k/#-3077871360">@SergeyTimakin</a> 
+Почта: timakin1983@mail.ru
  <a href="#">dis parturient montes</a>, nascetur ridiculus mus. *Aenean eu leo quam.* Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
 
 > Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
