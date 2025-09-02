@@ -16,6 +16,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+.message {
+  text-align: left; /* для типа message выранивание будет по левой стороне */
+} 
+
 
 /*
  * Wrapper
