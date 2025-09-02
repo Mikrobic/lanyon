@@ -3,7 +3,7 @@ title: "Не Автор"
 tagline: "Тимакин Сергей"
 description: "Проекты Сергея Тимакина"
 url: "https://mikrobic.github.io"
-baseurl: "/lanyon"
+baseurl: "/site"
 paginate: 5
 permalink: /:baseurl/:path/
 
