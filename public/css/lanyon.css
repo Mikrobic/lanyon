@@ -1,6 +1,7 @@
 html,
 body {
   overflow-x: hidden;
+  text-align: justify;  /*выравнивание по ширине */
 }
 
 html {
