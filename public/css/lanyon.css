@@ -233,8 +233,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-50%) rotate(180deg);
 }
 
-/*Подпункт BI - отчеты */
-.sidebar-nav-group_2 {
+.sidebar-nav-group_lvl_2 {
   margin-left: 15px;
   border-left: 2px solid rgba(255, 255, 255, 0.1);
   padding-left: 10px;
@@ -242,7 +241,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 5px;
 }
 
-.sidebar-nav-toggle_2 { 
+.sidebar-nav-toggle_lvl_2 { 
   position: relative;
   background-color: transparent !important; 
   padding-right: 2rem;
@@ -255,24 +254,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-.sidebar-nav-group_2.active > .sidebar-nav-toggle_2 {
+.sidebar-nav-group_lvl_2.active > .sidebar-nav-toggle_lvl_2 {
   color: #fff !important;
   background-color: rgba(255,255,255,.15) !important;
 }
 
 
-.sidebar-submenu_2 {
+.sidebar-submenu_lvl_2 {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
   padding-left: 15px;
 }
 
-.sidebar-nav-group_2.active .sidebar-submenu_2 {
+.sidebar-nav-group_lvl_2.active .sidebar-submenu_lvl_2 {
   max-height: 500px;
 }
 
-.toggle-icon_2 {
+.toggle-icon_lvl_2 {
   position: absolute;
   right: 1rem;
   top: 50%;
@@ -283,9 +282,13 @@ h1, h2, h3, h4, h5, h6 {
   transition: transform 0.2s;
 }
 
-.sidebar-nav-group_2.active .toggle-icon_2 {
+.sidebar-nav-group_lvl_2.active .toggle-icon_lvl_2 {
   transform: translateY(-50%) rotate(180deg);
 }
+
+
+
+
 
 .submenu-item {
   position: relative;
