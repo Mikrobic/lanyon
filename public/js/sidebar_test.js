@@ -5,7 +5,7 @@ class SidebarMenu {
     }
 
     init() {
-        // Восстановление состояния из localStorage для всех уровней toggle
+        // Восстановление состояния из localStorage
         this.restoreMenuState();
         
         // Автораскрытие активного меню
@@ -66,9 +66,10 @@ class SidebarMenu {
         } else {
             group.classList.add('active');
             this.updateLocalStorage(toggle, 'open');
-            // Закрываем другие меню ТОГО ЖЕ УРОВНЯ
-            this.closeSiblingMenusSameLevel(group);
         }
+        
+        // УБРАНО: закрытие других меню того же уровня
+        // Теперь кнопки не влияют друг на друга при нажатии
     }
 
     closeChildren(parentGroup) {
@@ -80,32 +81,6 @@ class SidebarMenu {
                 localStorage.setItem(childToggle.dataset.menuId, 'closed');
             }
         });
-    }
-
-    closeSiblingMenusSameLevel(currentGroup) {
-        const parent = currentGroup.parentElement;
-        if (!parent) return;
-        
-        const currentLevel = this.getNavGroupLevel(currentGroup);
-        
-        parent.querySelectorAll('.sidebar-nav-group').forEach(siblingGroup => {
-            if (siblingGroup !== currentGroup) {
-                const siblingLevel = this.getNavGroupLevel(siblingGroup);
-                if (siblingLevel === currentLevel) {
-                    const siblingButton = siblingGroup.querySelector('.sidebar-nav-toggle, .sidebar-nav-toggle_2');
-                    if (siblingButton && siblingButton.dataset.menuId) {
-                        siblingGroup.classList.remove('active');
-                        localStorage.setItem(siblingButton.dataset.menuId, 'closed');
-                    }
-                }
-            }
-        });
-    }
-
-    getNavGroupLevel(group) {
-        if (group.classList.contains('sidebar-nav-group_2')) return 2;
-        if (group.classList.contains('sidebar-nav-group')) return 1;
-        return 1;
     }
 
     updateLocalStorage(toggle, state) {
@@ -136,16 +111,6 @@ class SidebarMenu {
                 this.updateLocalStorage(toggle, 'closed');
             }
         }
-    }
-
-    closeAll() {
-        this.menuGroups.forEach(group => {
-            group.classList.remove('active');
-            const toggle = group.querySelector('.sidebar-nav-toggle, .sidebar-nav-toggle_2');
-            if (toggle && toggle.dataset.menuId) {
-                localStorage.setItem(toggle.dataset.menuId, 'closed');
-            }
-        });
     }
 }
 
