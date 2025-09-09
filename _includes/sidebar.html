@@ -20,57 +20,53 @@
       <a class="sidebar-nav-item" href="{{ site.baseurl }}/career/">💼Карьерный трек</a>
       <a class="sidebar-nav-item" href="{{ site.baseurl }}/stack/">📱Стек</a>
 
-<!-- В _includes/sidebar.html -->
-<div class="sidebar-nav-group sidebar-nav-group">
-  <button class="sidebar-nav-item sidebar-nav-toggle" data-menu-id="projects_main">
-    <span class="toggle-content">
-      📋Проекты
-      <svg class="toggle-icon" viewBox="0 0 24 24">
-        <path d="M7 10l5 5 5-5z"/>
-      </svg>
-    </span>
-  </button>
-  
-  <div class="sidebar-submenu">
-    <!-- Проекты_2 -->
-    <div class="sidebar-nav-group sidebar-nav-group_2">
-      <button class="sidebar-nav-item sidebar-nav-toggle_2" data-menu-id="project_2">
-        <span class="toggle-content_2">
-          Бизнес проекты
-          <svg class="toggle-icon_2" viewBox="0 0 24 24">
-            <path d="M7 10l5 5 5-5z"/>
-          </svg>
-        </span>
-      </button>
-      <div class="sidebar-submenu_2">
-        </a>
-        <a href="{{ site.baseurl }}/project/project_2/basket/" class="sidebar-nav-item submenu-item">
-          Аналитика корзины
-        </a>
+      <!-- Меню проектов с универсальными классами -->
+      <div class="sidebar-nav-group">
+        <button class="sidebar-nav-item sidebar-nav-toggle">
+          <span class="toggle-content">
+            📋Проекты
+            <svg class="toggle-icon" viewBox="0 0 24 24">
+              <path d="M7 10l5 5 5-5z"/>
+            </svg>
+          </span>
+        </button>
+        
+        <div class="sidebar-submenu">
+          <!-- Бизнес проекты -->
+          <div class="sidebar-nav-group">
+            <button class="sidebar-nav-item sidebar-nav-toggle">
+              <span class="toggle-content">
+                Бизнес проекты
+                <svg class="toggle-icon" viewBox="0 0 24 24">
+                  <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </span>
+            </button>
+            <div class="sidebar-submenu">
+              <a href="{{ site.baseurl }}/project/project_2/basket/" class="sidebar-nav-item submenu-item">
+                Аналитика корзины
+              </a>
+            </div>
+          </div>
+
+          <!-- Технические проекты -->
+          <div class="sidebar-nav-group">
+            <button class="sidebar-nav-item sidebar-nav-toggle">
+              <span class="toggle-content">
+                Технические проекты
+                <svg class="toggle-icon" viewBox="0 0 24 24">
+                  <path d="M7 10l5 5 5-5z"/>
+                </svg>
+              </span>
+            </button>
+            <div class="sidebar-submenu">
+              <a href="{{ site.baseurl }}/project/project_3/capacity/" class="sidebar-nav-item submenu-item">
+                Капасити отчетность
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-
-
-    <!-- Проекты_3 -->
-    <div class="sidebar-nav-group sidebar-nav-group_3">
-      <button class="sidebar-nav-item sidebar-nav-toggle_3" data-menu-id="project_3">
-        <span class="toggle-content_3">
-          Технические проекты
-          <svg class="toggle-icon_3" viewBox="0 0 24 24">
-            <path d="M7 10l5 5 5-5z"/>
-          </svg>
-        </span>
-      </button>
-      <div class="sidebar-submenu_3">
-        </a>
-        <a href="{{ site.baseurl }}/project/project_3/capacity/" class="sidebar-nav-item submenu-item">
-          Капасити отчетность
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
       
       <div class="sidebar-item">
         <p>&copy; {{ site.time | date: '%Y' }}. Тимакин Сергей.</p>
