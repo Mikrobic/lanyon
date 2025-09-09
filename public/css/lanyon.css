@@ -343,6 +343,62 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+
+.sidebar-nav-group_teach {
+  margin-left: 15px;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+  padding-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.sidebar-nav-toggle_teach { 
+  position: relative;
+  background-color: transparent !important; 
+  padding-right: 2rem;
+  cursor: pointer;
+  /* Убираем белый фон */
+  width: 100%;
+  text-align: left;
+  border: none;
+  color: rgba(255,255,255,.8) !important; /* Цвет текста */
+}
+
+
+.sidebar-nav-group_teach.active > .sidebar-nav-toggle_teach {
+  color: #fff !important;
+  background-color: rgba(255,255,255,.15) !important;
+}
+
+
+.sidebar-submenu_teach {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding-left: 15px;
+}
+
+.sidebar-nav-group_teach.active .sidebar-submenu_teach {
+  max-height: 500px;
+}
+
+.toggle-icon_teach {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  transition: transform 0.2s;
+}
+
+.sidebar-nav-group_teach.active .toggle-icon_teach {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+
+
 .submenu-item {
   position: relative;
   padding-left: 15px !important;
