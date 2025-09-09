@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Ёмкость ресурсов на кластерах виртуальной инфраструктуры"
-permalink: /project/project_3/capacity/
+permalink: /project/technical_projects/capacity/
 description: "Описание страницы Subpage"
 ---
 
